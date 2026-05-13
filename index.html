@@ -880,6 +880,12 @@
   .contact-btn-icon { font-size: 15px; }
 
   /* FOOTER */
+  .footer-outer {
+    background: #ffffff;
+    border-top: 1px solid var(--border);
+    margin-top: 40px;
+  }
+
   footer {
     padding: 32px 48px;
     display: flex;
@@ -1517,10 +1523,11 @@
 </div>
 
 
-<footer>
-  <span data-zh="© 2026 · AI Product Manager Portfolio" data-en="© 2026 · AI Product Manager Portfolio">© 2026 · AI Product Manager Portfolio</span>
-  <span data-zh="以 Claude Code 協助製作" data-en="Built with Claude Code">以 Claude Code 協助製作</span>
-</footer>
+<div class="footer-outer">
+  <footer>
+    <span data-zh="© 2026 · AI Product Manager Portfolio" data-en="© 2026 · AI Product Manager Portfolio">© 2026 · AI Product Manager Portfolio</span>
+  </footer>
+</div>
 
 <script>
   let currentLang = 'zh';
