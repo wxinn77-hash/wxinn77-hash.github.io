@@ -1,0 +1,1657 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio — AI Product Manager</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #ffffff;
+    --surface: #ffffff;
+    --border: #e8e6e1;
+    --text-primary: #141412;
+    --text-secondary: #6b6860;
+    --text-muted: #a8a49e;
+    --accent: #1a1a18;
+    --accent-soft: #f0ede8;
+    --tag-bg: #f4f2ef;
+    --metric-accent: #0f7b5e;
+    --radius: 2px;
+    --transition: 0.2s ease;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', 'Noto Sans TC', sans-serif;
+    background: var(--bg);
+    color: var(--text-primary);
+    font-size: 15px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* HEADER */
+  header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background: rgba(250, 250, 249, 0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px;
+  }
+
+  .logo {
+    font-family: 'Instrument Serif', serif;
+    font-size: 18px;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    text-decoration: none;
+  }
+
+  nav {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+  }
+
+  nav a {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--text-secondary);
+    text-decoration: none;
+    letter-spacing: 0.01em;
+    transition: color var(--transition);
+  }
+
+  nav a:hover { color: var(--text-primary); }
+
+  .lang-toggle {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-left: 8px;
+  }
+
+  .lang-btn {
+    padding: 4px 10px;
+    font-size: 12px;
+    font-weight: 500;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text-muted);
+    transition: all var(--transition);
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .lang-btn.active {
+    background: var(--text-primary);
+    color: white;
+  }
+
+  /* HERO */
+  .hero {
+    padding: 140px 40px 100px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .hero-eyebrow {
+    font-size: 22px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    color: var(--text-secondary);
+    margin-bottom: 28px;
+  }
+
+  .hero-title {
+    font-family: system-ui, -apple-system, sans-serif;
+    font-weight: 700;
+    font-size: clamp(48px, 7vw, 88px);
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    color: var(--text-primary);
+    margin-bottom: 32px;
+    max-width: 14ch;
+  }
+
+  .hero-accent {
+    color: #e05a1e;
+    font-style: normal;
+  }
+
+  .hero-desc {
+    font-size: 17px;
+    color: var(--text-secondary);
+    max-width: 480px;
+    line-height: 1.7;
+    margin-bottom: 48px;
+    font-weight: 300;
+  }
+
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--text-primary);
+    color: white;
+    padding: 12px 24px;
+    border-radius: var(--radius);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    transition: opacity var(--transition);
+  }
+
+  .hero-cta:hover { opacity: 0.8; }
+
+  .hero-layout {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .hero-stats {
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 28px 32px;
+    background: var(--surface);
+  }
+
+  .stat-eyebrow {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+  }
+
+  .stat-row {
+    display: flex;
+    align-items: center;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .stat-row:last-child { border-bottom: none; padding-bottom: 0; }
+
+  .stat-label {
+    font-size: 13px;
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .stat-sep {
+    color: var(--border);
+    font-size: 14px;
+    padding: 0 20px;
+    flex-shrink: 0;
+  }
+
+  .stat-value {
+    font-family: system-ui, -apple-system, sans-serif;
+    font-size: 36px;
+    font-weight: 700;
+    color: #e05a1e;
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
+
+  /* SECTION */
+  section {
+    padding: 100px 40px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 60px;
+  }
+
+  .section-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    flex-shrink: 0;
+  }
+
+  .section-line {
+    height: 1px;
+    background: var(--border);
+    flex: 1;
+  }
+
+  /* CASE STUDY */
+  .case-study {
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 80px;
+    background: var(--surface);
+  }
+
+  .cs-header-area {
+    padding: 48px 48px 36px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .cs-tag {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 10px;
+    background: var(--tag-bg);
+    border-radius: 2px;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  .cs-title {
+    font-family: 'Instrument Serif', serif;
+    font-size: 36px;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    margin-bottom: 16px;
+  }
+
+  .cs-desc {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.75;
+    font-weight: 300;
+  }
+
+  .cs-panel-nav {
+    display: flex;
+    align-items: center;
+    padding: 0 48px;
+    height: 52px;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg);
+  }
+
+  .cs-nav-btn { display: none; }
+
+  .cs-steps {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .cs-step {
+    font-size: 12px;
+    color: var(--text-muted);
+    cursor: pointer;
+    padding: 5px 14px;
+    border-radius: 2px;
+    border: 1px solid transparent;
+    transition: all var(--transition);
+    user-select: none;
+  }
+
+  .cs-step:hover { color: var(--text-primary); background: var(--tag-bg); }
+
+  .cs-step.active {
+    color: var(--text-primary);
+    font-weight: 500;
+    background: var(--tag-bg);
+    border-color: var(--border);
+  }
+
+  .cs-step-sep { display: none; }
+
+  .cs-panel { display: none; }
+  .cs-panel.active { display: block; animation: csIn 0.25s ease; }
+
+  @keyframes csIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Panel 1 – Process */
+  .cs-process-panel {
+    padding: 40px 48px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .process-step {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+  }
+
+  .process-num {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--text-muted);
+    padding-top: 3px;
+    min-width: 20px;
+    letter-spacing: 0.06em;
+    flex-shrink: 0;
+  }
+
+  .process-title {
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+
+  .process-desc {
+    font-size: 12px;
+    color: var(--text-secondary);
+    line-height: 1.65;
+    font-weight: 300;
+  }
+
+  /* Panel 2 – UI */
+  .cs-ui-panel { padding: 40px 48px; }
+
+  .cs-ui-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+
+  .cs-ui-img {
+    width: 100%;
+    aspect-ratio: 9/16;
+    object-fit: cover;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+    display: block;
+    background: var(--accent-soft);
+  }
+
+  .cs-ui-label {
+    font-size: 11px;
+    color: var(--text-muted);
+    text-align: center;
+    margin-top: 10px;
+    letter-spacing: 0.03em;
+  }
+
+  .cs-ui-label.is-before { color: var(--text-secondary); font-weight: 500; }
+
+  /* Panel 3 – Results */
+  .cs-results-panel {
+    padding: 52px 48px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    background: var(--accent-soft);
+  }
+
+  .cs-result-number {
+    font-family: system-ui, -apple-system, sans-serif;
+    font-size: 64px;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: var(--metric-accent);
+    line-height: 1;
+    margin-bottom: 12px;
+  }
+
+  .cs-result-name {
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 6px;
+  }
+
+  .cs-result-detail {
+    font-size: 11px;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  /* Roles bar */
+  .cs-roles-bar {
+    padding: 20px 48px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    background: var(--surface);
+  }
+
+  .cs-roles-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-right: 4px;
+  }
+
+  .cs-role-pill {
+    font-size: 11px;
+    padding: 4px 10px;
+    background: var(--tag-bg);
+    border-radius: 2px;
+    color: var(--text-secondary);
+    font-weight: 500;
+  }
+
+  /* AI PROJECTS GRID */
+  .ai-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .ai-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: box-shadow var(--transition), flex-basis 0.4s ease, opacity 0.3s ease;
+    cursor: pointer;
+  }
+
+  .ai-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.08); }
+
+  .ai-screenshot {
+    width: 100%;
+    aspect-ratio: 16/9;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .ai-cover-svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  /* AI PROJECTS: compact tabs + expand-below detail */
+  .ai-cards-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .ai-card {
+    flex: 0 0 calc(50% - 8px);
+    cursor: pointer;
+    transition: flex-basis 0.4s ease, gap 0.4s ease, opacity 0.3s ease;
+  }
+  .ai-cards-row.detail-open { gap: 8px; }
+  .ai-cards-row.detail-open .ai-card { flex: 0 0 calc(25% - 6px); }
+  .ai-cards-row.detail-open .ai-card:not(.selected) { opacity: 0.5; }
+  .ai-card.selected { outline: 2px solid #e05a1e; outline-offset: 2px; }
+
+  /* Card body collapse */
+  .ai-desc, .ai-tags {
+    max-height: 300px;
+    overflow: hidden;
+    opacity: 1;
+    transition: max-height 0.35s ease, opacity 0.25s ease, margin 0.25s ease;
+  }
+  .ai-cards-row.detail-open .ai-desc,
+  .ai-cards-row.detail-open .ai-tags { max-height: 0; opacity: 0; margin: 0; }
+  .ai-cards-row.detail-open .ai-card-body { padding: 8px 12px; }
+  .ai-cards-row.detail-open .ai-card-header { margin-bottom: 3px; }
+  .ai-cards-row.detail-open .ai-icon { display: none; }
+  .ai-cards-row.detail-open .ai-category { font-size: 8px; }
+  .ai-cards-row.detail-open .ai-title { font-size: 11px; line-height: 1.3; margin-bottom: 0; }
+
+  /* Detail below panel */
+  .ai-detail-below {
+    height: 0;
+    overflow: hidden;
+    transition: height 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .ai-detail-inner {
+    margin-top: 12px;
+    padding: 32px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+  }
+  .ai-detail-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 24px;
+    gap: 16px;
+  }
+  .ai-detail-close {
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background: none;
+    cursor: pointer;
+    font-size: 12px;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition);
+  }
+  .ai-detail-close:hover { background: var(--tag-bg); color: var(--text-primary); }
+  .ai-detail-screenshots {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 28px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid var(--border);
+  }
+  .ai-detail-screenshots img {
+    flex: 1;
+    min-width: 0;
+    height: 160px;
+    object-fit: cover;
+    object-position: top center;
+    border-radius: 4px;
+    cursor: zoom-in;
+    background: var(--accent-soft);
+    transition: opacity 0.2s;
+  }
+  .ai-detail-screenshots img:hover { opacity: 0.82; }
+  .ai-detail-sections {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 40px;
+  }
+  .ai-detail-sections .modal-section { break-inside: avoid; }
+
+  /* Lightbox */
+  .ai-lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.92);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+    cursor: zoom-out;
+  }
+  .ai-lightbox.active { opacity: 1; pointer-events: all; }
+  .ai-lightbox-img {
+    max-width: 88vw;
+    max-height: 88vh;
+    object-fit: contain;
+    border-radius: 6px;
+    cursor: default;
+    box-shadow: 0 24px 80px rgba(0,0,0,0.6);
+  }
+  .ai-lightbox-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 36px;
+    height: 36px;
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 4px;
+    background: none;
+    cursor: pointer;
+    font-size: 15px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+  }
+  .ai-lightbox-close:hover { background: rgba(255,255,255,0.12); }
+
+  .modal-tag {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+    padding: 3px 8px;
+    border-radius: 2px;
+    margin-bottom: 14px;
+  }
+  .modal-title {
+    font-family: 'Instrument Serif', serif;
+    font-size: 30px;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    margin-bottom: 32px;
+  }
+  .modal-section {
+    margin-bottom: 24px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--border);
+  }
+  .modal-section:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+  .modal-section-title {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+  }
+  .modal-section p { font-size: 14px; color: var(--text-secondary); line-height: 1.75; font-weight: 300; margin-bottom: 8px; }
+  .modal-section p:last-child { margin-bottom: 0; }
+  .modal-list { list-style: none; display: flex; flex-direction: column; gap: 7px; }
+  .modal-list li { font-size: 14px; color: var(--text-secondary); line-height: 1.65; font-weight: 300; padding-left: 16px; position: relative; }
+  .modal-list li::before { content: '—'; position: absolute; left: 0; color: var(--text-muted); }
+  .modal-pills { display: flex; flex-wrap: wrap; gap: 8px; }
+  .modal-pill { font-size: 12px; padding: 4px 12px; background: var(--tag-bg); border-radius: 2px; color: var(--text-secondary); }
+
+  .ai-card:nth-child(1) .ai-screenshot { background: #f0ede8; }
+  .ai-card:nth-child(2) .ai-screenshot { background: #e8ede9; }
+  .ai-card:nth-child(3) .ai-screenshot { background: #e8ecf2; }
+  .ai-card:nth-child(4) .ai-screenshot { background: #ede8f2; }
+
+  .ai-card-body {
+    padding: 24px;
+  }
+
+  .ai-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 12px;
+  }
+
+  .ai-icon { display: none; }
+
+  .ai-category {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    padding: 3px 8px;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+  }
+
+  .ai-title {
+    font-family: 'Instrument Serif', serif;
+    font-size: 20px;
+    letter-spacing: -0.01em;
+    margin-bottom: 10px;
+    line-height: 1.25;
+  }
+
+  .ai-desc {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    font-weight: 300;
+    margin-bottom: 16px;
+  }
+
+  .ai-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .tag {
+    font-size: 11px;
+    padding: 3px 8px;
+    background: var(--tag-bg);
+    border-radius: 2px;
+    color: var(--text-secondary);
+    font-weight: 500;
+  }
+
+  /* ABOUT */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  .about-intro {
+    font-family: 'Instrument Serif', serif;
+    font-size: 28px;
+    letter-spacing: -0.02em;
+    line-height: 1.3;
+    color: var(--text-primary);
+  }
+
+  .about-text {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.85;
+    font-weight: 300;
+    margin-bottom: 20px;
+  }
+
+  .about-section-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+    margin-top: 28px;
+  }
+  .about-section-label:first-child { margin-top: 0; }
+
+  .skills-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .skill-tag {
+    font-size: 12px;
+    padding: 6px 12px;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    color: var(--text-secondary);
+  }
+
+  /* CONTACT */
+  .contact-block {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding: 60px;
+    background: var(--text-primary);
+    border-radius: 4px;
+    color: white;
+  }
+
+  .contact-left {}
+
+  .contact-eyebrow {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 16px;
+  }
+
+  .contact-headline {
+    font-family: 'Instrument Serif', serif;
+    font-size: 40px;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    max-width: 380px;
+  }
+
+  .contact-links {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-end;
+  }
+
+  .contact-link {
+    font-size: 13px;
+    color: rgba(255,255,255,0.6);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: color var(--transition);
+  }
+
+  .contact-link:hover { color: white; }
+
+  /* FOOTER */
+  footer {
+    padding: 32px 40px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  footer span {
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  /* DIVIDER */
+  .section-divider {
+    max-width: 1100px;
+    margin: 0 auto;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* MOBILE */
+  @media (max-width: 768px) {
+    header { padding: 0 20px; }
+    nav a { display: none; }
+    .hero { padding: 100px 20px 60px; }
+    .hero-layout { grid-template-columns: 1fr; gap: 40px; }
+    .hero-stats { padding: 20px 24px; }
+    section { padding: 60px 20px; }
+    .cs-header-area { padding: 24px; }
+    .cs-panel-nav { padding: 0 16px; }
+    .cs-steps { gap: 4px; }
+    .cs-step { padding: 3px 7px; font-size: 11px; }
+    .cs-process-panel { padding: 24px; }
+    .cs-ui-panel { padding: 24px; }
+    .cs-ui-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .cs-results-panel { grid-template-columns: 1fr; padding: 24px; gap: 24px; }
+    .cs-result-number { font-size: 48px; }
+    .cs-roles-bar { padding: 16px 24px; }
+    .ai-cards-row .ai-card { flex: 0 0 100%; }
+    .ai-cards-row.detail-open .ai-card { flex: 0 0 calc(50% - 4px); }
+    .about-grid { grid-template-columns: 1fr; gap: 40px; }
+    .contact-block { flex-direction: column; gap: 40px; padding: 40px; }
+    .contact-links { align-items: flex-start; }
+    footer { flex-direction: column; gap: 12px; text-align: center; }
+  }
+
+  /* ANIMATION */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-eyebrow { animation: fadeUp 0.6s ease both; animation-delay: 0.1s; }
+  .hero-title { animation: fadeUp 0.6s ease both; animation-delay: 0.2s; }
+  .hero-desc { animation: fadeUp 0.6s ease both; animation-delay: 0.3s; }
+  .hero-cta { animation: fadeUp 0.6s ease both; animation-delay: 0.4s; }
+  .hero-stats { animation: fadeUp 0.6s ease both; animation-delay: 0.5s; }
+</style>
+</head>
+<body>
+
+<header>
+  <a href="#" class="logo"></a>
+  <nav>
+    <a href="#work" data-zh="作品" data-en="Work">作品</a>
+    <a href="#about" data-zh="關於" data-en="About">關於</a>
+    <div class="lang-toggle">
+      <button class="lang-btn active" onclick="setLang('zh')">ZH</button>
+      <button class="lang-btn" onclick="setLang('en')">EN</button>
+    </div>
+  </nav>
+</header>
+
+<main>
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-layout">
+      <div class="hero-left">
+        <p class="hero-eyebrow" data-zh="AI Product Manager" data-en="AI Product Manager">AI Product Manager</p>
+        <h1 class="hero-title" data-zh="讓<span class='hero-accent'>AI</span><br>融入在生活之中" data-en="Weaving <span class='hero-accent'>AI</span><br>into everyday life">讓<span class="hero-accent">AI</span><br>融入在生活之中</h1>
+        <p class="hero-desc" data-zh="不再只是 teller，而是正在成為 builder 的路上。" data-en="No longer just a teller — on the path to becoming a builder.">不再只是 teller，而是正在成為 builder 的路上。</p>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-eyebrow" data-zh="個人亮點" data-en="Highlights">個人亮點</div>
+        <div class="stat-row">
+          <span class="stat-label" data-zh="尊貴會員年成長" data-en="Premium Member Growth">尊貴會員年成長</span>
+          <span class="stat-sep">|</span>
+          <span class="stat-value"><span style="color:#e03030;font-size:0.6em;vertical-align:middle;margin-right:2px">▲</span>30%</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label" data-zh="平均看片率提升" data-en="Avg. Watch Rate Growth">平均看片率提升</span>
+          <span class="stat-sep">|</span>
+          <span class="stat-value"><span style="color:#e03030;font-size:0.6em;vertical-align:middle;margin-right:2px">▲</span>66%</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-divider"></div>
+
+  <!-- WORK -->
+  <section id="work">
+    <div class="section-header">
+      <span class="section-label" data-zh="過去帶領專案" data-en="Past Projects Led">過去帶領專案</span>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="case-study">
+      <!-- Header -->
+      <div class="cs-header-area">
+        <span class="cs-tag" data-zh="影音 App · 搜尋功能" data-en="Video App · Search Feature">影音 App · 搜尋功能</span>
+        <h2 class="cs-title" data-zh="搜尋頁改版：<br>熱搜推薦即時化" data-en="Search Page Redesign:<br>Real-time Trending">搜尋頁改版：<br>熱搜推薦即時化</h2>
+        <p class="cs-desc" data-zh="原始痛點：舊版熱搜以累積搜尋量排序，資料更新頻率低，容易出現過時關鍵字佔據熱門位置。改版後導入時效性權重機制，以 8 小時對比 7 天平均成長率動態計算熱搜，每 5 分鐘更新一次，即時反映用戶當下搜尋趨勢。" data-en="Pain point: The old search used cumulative volume rankings with low refresh rates, causing outdated keywords to dominate. The redesign introduced a time-weighted trending algorithm — comparing 8-hour volume against 7-day averages, refreshing every 5 minutes to reflect real-time user intent.">原始痛點：舊版熱搜以累積搜尋量排序，資料更新頻率低，容易出現過時關鍵字佔據熱門位置。改版後導入時效性權重機制，以 8 小時對比 7 天平均成長率動態計算熱搜，每 5 分鐘更新一次，即時反映用戶當下搜尋趨勢。</p>
+      </div>
+
+      <!-- Panel Navigation -->
+      <div class="cs-panel-nav">
+        <button class="cs-nav-btn" id="cs-prev" onclick="changePanel(-1)" disabled>&#8592;</button>
+        <div class="cs-steps">
+          <span class="cs-step active" onclick="goPanel(0)" data-zh="思考流程" data-en="Process">思考流程</span>
+          <span class="cs-step-sep">›</span>
+          <span class="cs-step" onclick="goPanel(1)" data-zh="UI 演變" data-en="UI Changes">UI 演變</span>
+          <span class="cs-step-sep">›</span>
+          <span class="cs-step" onclick="goPanel(2)" data-zh="上線成效" data-en="Results">上線成效</span>
+        </div>
+        <button class="cs-nav-btn" id="cs-next" onclick="changePanel(1)">&#8594;</button>
+      </div>
+
+      <!-- Panel 1: Process -->
+      <div class="cs-panel active" id="cs-panel-0">
+        <div class="cs-process-panel">
+          <div class="process-step">
+            <span class="process-num">01</span>
+            <div>
+              <div class="process-title" data-zh="問題定義" data-en="Problem Definition">問題定義</div>
+              <div class="process-desc" data-zh="舊版資訊層次不清晰，熱搜缺乏即時感，分類區塊佔用過多視覺空間，歷史搜尋位置不符合用戶流程。" data-en="Poor information hierarchy, trending search lacked recency signals, category blocks consumed excessive visual space, and history search was positioned before user intent formed.">舊版資訊層次不清晰，熱搜缺乏即時感，分類區塊佔用過多視覺空間，歷史搜尋位置不符合用戶流程。</div>
+            </div>
+          </div>
+          <div class="process-step">
+            <span class="process-num">02</span>
+            <div>
+              <div class="process-title" data-zh="後端邏輯設計" data-en="Backend Logic Design">後端邏輯設計</div>
+              <div class="process-desc" data-zh="定義關鍵字篩選規則（長度、搜尋量門檻、過濾無結果詞）與成長率計算公式，設計防資料不足的 fallback 邏輯。" data-en="Defined keyword filtering rules (length, volume thresholds, no-result exclusions) and the growth rate formula, plus fallback logic when insufficient trending data exists.">定義關鍵字篩選規則（長度、搜尋量門檻、過濾無結果詞）與成長率計算公式，設計防資料不足的 fallback 邏輯。</div>
+            </div>
+          </div>
+          <div class="process-step">
+            <span class="process-num">03</span>
+            <div>
+              <div class="process-title" data-zh="UI 重構與協作" data-en="UI Redesign & Collaboration">UI 重構與協作</div>
+              <div class="process-desc" data-zh="重新梳理頁面資訊層次，將歷史搜尋後移至鍵盤展開時出現，強化熱搜視覺辨識度，每日 stand-up 追蹤開發進度。" data-en="Restructured page hierarchy, moved search history to keyboard-trigger state, enhanced trending visual cues, and ran daily stand-ups to track development progress.">重新梳理頁面資訊層次，將歷史搜尋後移至鍵盤展開時出現，強化熱搜視覺辨識度，每日 stand-up 追蹤開發進度。</div>
+            </div>
+          </div>
+          <div class="process-step">
+            <span class="process-num">04</span>
+            <div>
+              <div class="process-title" data-zh="數據埋點與成效追蹤" data-en="Analytics & Measurement">數據埋點與成效追蹤</div>
+              <div class="process-desc" data-zh="規劃 GA4 事件路徑，設定搜尋頁 PV、關鍵字點擊數、無結果比例為核心指標，上線後持續觀察數據變化。" data-en="Designed GA4 event tracking, defined core metrics (PV, keyword clicks, zero-result rate), and monitored post-launch data trends weekly.">規劃 GA4 事件路徑，設定搜尋頁 PV、關鍵字點擊數、無結果比例為核心指標，上線後持續觀察數據變化。</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Panel 2: UI Screenshots -->
+      <div class="cs-panel" id="cs-panel-1">
+        <div class="cs-ui-panel">
+          <div class="cs-ui-grid">
+            <div>
+              <img src="搜尋頁改版_原始畫面.png" alt="原始畫面" class="cs-ui-img">
+              <div class="cs-ui-label is-before" data-zh="改版前" data-en="Before">改版前</div>
+            </div>
+            <div>
+              <img src="搜尋頁改版_推薦3.png" alt="熱搜推薦" class="cs-ui-img">
+              <div class="cs-ui-label" data-zh="熱搜推薦" data-en="Trending">熱搜推薦</div>
+            </div>
+            <div>
+              <img src="搜尋頁改版_歷史搜尋.png" alt="歷史搜尋" class="cs-ui-img">
+              <div class="cs-ui-label" data-zh="歷史搜尋" data-en="History">歷史搜尋</div>
+            </div>
+            <div>
+              <img src="搜尋頁改版_關鍵字搜尋(有鍵盤).png" alt="關鍵字搜尋" class="cs-ui-img">
+              <div class="cs-ui-label" data-zh="關鍵字搜尋" data-en="Keyword Search">關鍵字搜尋</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Panel 3: Results with animation -->
+      <div class="cs-panel" id="cs-panel-2">
+        <div class="cs-results-panel">
+          <div>
+            <div class="cs-result-number" data-target="74" data-triangle="up" data-suffix="%">0%</div>
+            <div class="cs-result-name" data-zh="搜尋頁 PV 成長" data-en="Search Page PV">搜尋頁 PV 成長</div>
+            <div class="cs-result-detail" data-zh="週均從 10,000–12,000 成長至 21,257（上線首週）" data-en="Weekly avg: 10K–12K → 21,257 (first week post-launch)">週均從 10,000–12,000 成長至 21,257（上線首週）</div>
+          </div>
+          <div>
+            <div class="cs-result-number" data-target="43" data-triangle="down" data-suffix="%">0%</div>
+            <div class="cs-result-name" data-zh="搜尋無結果比例" data-en="Zero-Result Rate">搜尋無結果比例</div>
+            <div class="cs-result-detail" data-zh="從 39–43% 降至 22.66%，搜尋精準度大幅改善" data-en="Dropped from 39–43% to 22.66%, significant search quality improvement">從 39–43% 降至 22.66%，搜尋精準度大幅改善</div>
+          </div>
+          <div>
+            <div class="cs-result-number" data-target="21516" data-suffix="" data-comma="true">0</div>
+            <div class="cs-result-name" data-zh="日均關鍵字點擊" data-en="Daily Keyword Clicks">日均關鍵字點擊</div>
+            <div class="cs-result-detail" data-zh="用戶互動行為明顯提升，幾乎每位用戶都使用一次熱搜" data-en="Near 1:1 click-per-user ratio on trending search after launch">用戶互動行為明顯提升，幾乎每位用戶都使用一次熱搜</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Roles -->
+      <div class="cs-roles-bar">
+        <span class="cs-roles-label" data-zh="角色" data-en="Role">角色</span>
+        <span class="cs-role-pill" data-zh="需求定義與功能規格書" data-en="Requirements & PRD">需求定義與功能規格書</span>
+        <span class="cs-role-pill" data-zh="後端篩選邏輯設計" data-en="Backend Logic Design">後端篩選邏輯設計</span>
+        <span class="cs-role-pill" data-zh="RD / UI 設計師協作" data-en="RD & Designer Collaboration">RD / UI 設計師協作</span>
+        <span class="cs-role-pill" data-zh="測試與 Bug 追蹤" data-en="Testing & Bug Tracking">測試與 Bug 追蹤</span>
+        <span class="cs-role-pill" data-zh="GA4 數據埋點規劃" data-en="GA4 Event Tracking">GA4 數據埋點規劃</span>
+      </div>
+    </div>
+
+    <div class="section-header" style="margin-top: 80px;">
+      <span class="section-label" data-zh="AI 專案" data-en="AI Projects">AI 專案</span>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="ai-cards-row" id="ai-cards-row">
+
+      <!-- Card 1: Community App -->
+      <div class="ai-card" data-project="community" onclick="openDetail('community')" role="button" tabindex="0">
+        <div class="ai-screenshot">
+          <svg class="ai-cover-svg" viewBox="0 0 400 225" xmlns="http://www.w3.org/2000/svg">
+            <rect width="400" height="225" fill="#ede8e1"/>
+            <rect width="400" height="132" fill="#e4dfd6"/>
+            <rect y="197" width="400" height="28" fill="#c6bdb0"/>
+            <rect x="152" y="36" width="96" height="161" fill="#c2bab0"/>
+            <rect x="152" y="36" width="96" height="5" fill="#9e9288"/>
+            <rect x="166" y="52" width="15" height="13" fill="#e4dfd6" rx="1"/>
+            <rect x="192" y="52" width="15" height="13" fill="#0f7b5e" rx="1" opacity="0.75"/>
+            <rect x="218" y="52" width="15" height="13" fill="#e4dfd6" rx="1"/>
+            <rect x="166" y="72" width="15" height="13" fill="#e4dfd6" rx="1"/>
+            <rect x="192" y="72" width="15" height="13" fill="#e4dfd6" rx="1"/>
+            <rect x="218" y="72" width="15" height="13" fill="#0f7b5e" rx="1" opacity="0.5"/>
+            <rect x="166" y="92" width="15" height="13" fill="#0f7b5e" rx="1" opacity="0.65"/>
+            <rect x="192" y="92" width="15" height="13" fill="#e4dfd6" rx="1"/>
+            <rect x="218" y="92" width="15" height="13" fill="#e4dfd6" rx="1"/>
+            <rect x="166" y="112" width="15" height="13" fill="#e4dfd6" rx="1"/>
+            <rect x="192" y="112" width="15" height="13" fill="#0f7b5e" rx="1" opacity="0.7"/>
+            <rect x="218" y="112" width="15" height="13" fill="#e4dfd6" rx="1"/>
+            <rect x="166" y="132" width="15" height="13" fill="#e4dfd6" rx="1"/>
+            <rect x="192" y="132" width="15" height="13" fill="#e4dfd6" rx="1"/>
+            <rect x="218" y="132" width="15" height="13" fill="#0f7b5e" rx="1" opacity="0.45"/>
+            <rect x="184" y="167" width="32" height="30" fill="#9e9288" rx="1"/>
+            <circle cx="212" cy="182" r="2" fill="#c2bab0"/>
+            <rect x="58" y="76" width="76" height="121" fill="#cac2b8"/>
+            <rect x="68" y="88" width="13" height="11" fill="#e4dfd6" rx="1"/>
+            <rect x="96" y="88" width="13" height="11" fill="#e4dfd6" rx="1"/>
+            <rect x="68" y="106" width="13" height="11" fill="#0f7b5e" rx="1" opacity="0.4"/>
+            <rect x="96" y="106" width="13" height="11" fill="#e4dfd6" rx="1"/>
+            <rect x="68" y="124" width="13" height="11" fill="#e4dfd6" rx="1"/>
+            <rect x="96" y="124" width="13" height="11" fill="#e4dfd6" rx="1"/>
+            <rect x="68" y="142" width="13" height="11" fill="#e4dfd6" rx="1"/>
+            <rect x="96" y="142" width="13" height="11" fill="#0f7b5e" rx="1" opacity="0.5"/>
+            <rect x="75" y="170" width="20" height="27" fill="#9e9288" rx="1"/>
+            <rect x="266" y="90" width="76" height="107" fill="#cac2b8"/>
+            <rect x="274" y="100" width="13" height="11" fill="#e4dfd6" rx="1"/>
+            <rect x="302" y="100" width="13" height="11" fill="#e4dfd6" rx="1"/>
+            <rect x="274" y="118" width="13" height="11" fill="#e4dfd6" rx="1"/>
+            <rect x="302" y="118" width="13" height="11" fill="#0f7b5e" rx="1" opacity="0.4"/>
+            <rect x="274" y="136" width="13" height="11" fill="#0f7b5e" rx="1" opacity="0.5"/>
+            <rect x="302" y="136" width="13" height="11" fill="#e4dfd6" rx="1"/>
+            <rect x="274" y="154" width="13" height="11" fill="#e4dfd6" rx="1"/>
+            <rect x="302" y="154" width="13" height="11" fill="#e4dfd6" rx="1"/>
+            <rect x="282" y="175" width="20" height="22" fill="#9e9288" rx="1"/>
+            <rect x="108" y="178" width="7" height="19" fill="#988878"/>
+            <ellipse cx="111" cy="166" rx="22" ry="26" fill="#6a8f6a"/>
+            <rect x="268" y="184" width="5" height="13" fill="#988878"/>
+            <ellipse cx="270" cy="174" rx="16" ry="18" fill="#7d9a7d"/>
+          </svg>
+        </div>
+        <div class="ai-card-body">
+          <div class="ai-card-header">
+            <div class="ai-icon">🏢</div>
+            <span class="ai-category" data-zh="MVP · Replit" data-en="MVP · Replit">MVP · Replit</span>
+          </div>
+          <h3 class="ai-title" data-zh="社區管理 App" data-en="Community Management App">社區管理 App</h3>
+          <p class="ai-desc" data-zh="發現社區日常管理痛點（手抄瓦斯表、紙本申請、設施預約無電子化），以商業模式、TA 與核心用戶路徑為 Prompt，透過 AI 快速產出 Wireframe 與程式碼原型，自行規劃數據埋點與兩端（社區/開發者）的不同指標需求。" data-en="Identified community management pain points (manual meter reading, paper applications, no digital facility booking). Used business model, TA, and user flows as prompts to generate wireframes and code prototypes via AI. Designed dual analytics tracking for community vs. developer metrics.">發現社區日常管理痛點，以商業模式與用戶路徑為 Prompt，透過 AI 快速產出 Wireframe 與程式碼原型，並規劃雙端數據埋點策略。</p>
+          <div class="ai-tags">
+            <span class="tag">Replit</span>
+            <span class="tag">Prompt Engineering</span>
+            <span class="tag" data-zh="商業模式" data-en="Business Model">商業模式</span>
+            <span class="tag" data-zh="數據埋點" data-en="Analytics">數據埋點</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2: GA Report -->
+      <div class="ai-card" data-project="ga" onclick="openDetail('ga')" role="button" tabindex="0">
+        <div class="ai-screenshot">
+          <svg class="ai-cover-svg" viewBox="0 0 400 225" xmlns="http://www.w3.org/2000/svg">
+            <rect width="400" height="225" fill="#e2ebe4"/>
+            <rect x="14" y="12" width="372" height="201" rx="6" fill="#f0f5f1"/>
+            <rect x="14" y="12" width="372" height="48" rx="6" fill="#1a2e22"/>
+            <rect x="14" y="48" width="372" height="12" fill="#1a2e22"/>
+            <rect x="30" y="22" width="72" height="8" rx="2" fill="rgba(255,255,255,0.45)"/>
+            <rect x="30" y="34" width="48" height="5" rx="1" fill="rgba(255,255,255,0.22)"/>
+            <rect x="26" y="72" width="78" height="44" rx="4" fill="#cde4d2"/>
+            <rect x="32" y="79" width="34" height="6" rx="1" fill="#0f7b5e" opacity="0.6"/>
+            <rect x="32" y="89" width="52" height="14" rx="2" fill="#0f7b5e"/>
+            <rect x="116" y="72" width="78" height="44" rx="4" fill="#cde4d2"/>
+            <rect x="122" y="79" width="34" height="6" rx="1" fill="#0f7b5e" opacity="0.6"/>
+            <rect x="122" y="89" width="42" height="14" rx="2" fill="#0f7b5e"/>
+            <rect x="206" y="72" width="78" height="44" rx="4" fill="#cde4d2"/>
+            <rect x="212" y="79" width="34" height="6" rx="1" fill="#0f7b5e" opacity="0.6"/>
+            <rect x="212" y="89" width="56" height="14" rx="2" fill="#0f7b5e"/>
+            <line x1="26" y1="190" x2="294" y2="190" stroke="#c4d4c8" stroke-width="1"/>
+            <rect x="42" y="154" width="20" height="36" rx="2" fill="#0f7b5e" opacity="0.32"/>
+            <rect x="74" y="141" width="20" height="49" rx="2" fill="#0f7b5e" opacity="0.43"/>
+            <rect x="106" y="128" width="20" height="62" rx="2" fill="#0f7b5e" opacity="0.55"/>
+            <rect x="138" y="136" width="20" height="54" rx="2" fill="#0f7b5e" opacity="0.44"/>
+            <rect x="170" y="114" width="20" height="76" rx="2" fill="#0f7b5e" opacity="0.68"/>
+            <rect x="202" y="101" width="20" height="89" rx="2" fill="#0f7b5e" opacity="0.82"/>
+            <rect x="234" y="86" width="20" height="104" rx="2" fill="#0f7b5e"/>
+            <polyline points="52,152 84,139 116,126 148,134 180,112 212,99 244,84" stroke="#141412" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <rect x="300" y="72" width="70" height="42" rx="4" fill="#cde4d2"/>
+            <rect x="308" y="80" width="28" height="5" rx="1" fill="#0f7b5e" opacity="0.5"/>
+            <rect x="308" y="90" width="46" height="12" rx="2" fill="#0f7b5e" opacity="0.8"/>
+            <rect x="300" y="122" width="70" height="42" rx="4" fill="#cde4d2"/>
+            <rect x="308" y="130" width="28" height="5" rx="1" fill="#0f7b5e" opacity="0.5"/>
+            <rect x="308" y="140" width="36" height="12" rx="2" fill="#0f7b5e" opacity="0.65"/>
+            <rect x="300" y="172" width="70" height="26" rx="4" fill="#2aa3e0" opacity="0.85"/>
+            <rect x="308" y="179" width="42" height="4" rx="1" fill="white" opacity="0.8"/>
+            <rect x="308" y="187" width="30" height="4" rx="1" fill="white" opacity="0.5"/>
+          </svg>
+        </div>
+        <div class="ai-card-body">
+          <div class="ai-card-header">
+            <div class="ai-icon">📊</div>
+            <span class="ai-category" data-zh="自動化 · Claude API" data-en="Automation · Claude API">自動化 · Claude API</span>
+          </div>
+          <h3 class="ai-title" data-zh="GA 自動分析報表" data-en="GA Auto-Report Generator">GA 自動分析報表</h3>
+          <p class="ai-desc" data-zh="解決 PM 日常在 GA 探索中手動拉報表的繁瑣過程。串接 Claude API，設計三層 Pipeline（數據層 → 分析層 → 報表層），自動產出含圖表的 HTML 報表，並設定每週排程與 Telegram 異常通報。" data-en="Automated the tedious GA report-pulling workflow PMs face daily. Built a 3-layer pipeline (data → analysis → report), integrated Claude API for natural language insights, and set up weekly scheduling with Telegram anomaly alerts.">解決 PM 日常在 GA 探索中手動拉報表的繁瑣過程，串接 Claude API，自動產出含圖表的 HTML 報表與異常通報。</p>
+          <div class="ai-tags">
+            <span class="tag">Claude API</span>
+            <span class="tag">Python</span>
+            <span class="tag">GA4</span>
+            <span class="tag">Telegram</span>
+            <span class="tag" data-zh="自動排程" data-en="Scheduling">自動排程</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3: Stock Bot -->
+      <div class="ai-card" data-project="stock" onclick="openDetail('stock')" role="button" tabindex="0">
+        <div class="ai-screenshot">
+          <svg class="ai-cover-svg" viewBox="0 0 400 225" xmlns="http://www.w3.org/2000/svg">
+            <rect width="400" height="225" fill="#dae3f0"/>
+            <rect x="14" y="12" width="244" height="201" rx="6" fill="#edf1f8"/>
+            <line x1="14" y1="68" x2="258" y2="68" stroke="#ccd6e8" stroke-width="0.5"/>
+            <line x1="14" y1="108" x2="258" y2="108" stroke="#ccd6e8" stroke-width="0.5"/>
+            <line x1="14" y1="148" x2="258" y2="148" stroke="#ccd6e8" stroke-width="0.5"/>
+            <path d="M30,160 L68,145 L106,150 L142,130 L178,114 L214,98 L250,80 L250,213 L30,213 Z" fill="#4a7bc8" opacity="0.07"/>
+            <polyline points="30,160 68,145 106,150 142,130 178,114 214,98 250,80" stroke="#4a7bc8" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <line x1="40" y1="151" x2="40" y2="171" stroke="#e05a5a" stroke-width="1" opacity="0.7"/>
+            <rect x="36" y="153" width="8" height="12" rx="1" fill="#e05a5a" opacity="0.7"/>
+            <line x1="78" y1="137" x2="78" y2="155" stroke="#3aaa6a" stroke-width="1" opacity="0.7"/>
+            <rect x="74" y="139" width="8" height="10" rx="1" fill="#3aaa6a" opacity="0.7"/>
+            <line x1="116" y1="142" x2="116" y2="160" stroke="#e05a5a" stroke-width="1" opacity="0.7"/>
+            <rect x="112" y="144" width="8" height="12" rx="1" fill="#e05a5a" opacity="0.7"/>
+            <line x1="152" y1="122" x2="152" y2="139" stroke="#3aaa6a" stroke-width="1"/>
+            <rect x="148" y="124" width="8" height="11" rx="1" fill="#3aaa6a"/>
+            <line x1="188" y1="106" x2="188" y2="123" stroke="#3aaa6a" stroke-width="1"/>
+            <rect x="184" y="108" width="8" height="11" rx="1" fill="#3aaa6a"/>
+            <line x1="224" y1="90" x2="224" y2="107" stroke="#3aaa6a" stroke-width="1"/>
+            <rect x="220" y="92" width="8" height="11" rx="1" fill="#3aaa6a"/>
+            <rect x="228" y="70" width="30" height="18" rx="3" fill="#3aaa6a"/>
+            <rect x="218" y="76" width="10" height="6" fill="#3aaa6a"/>
+            <rect x="232" y="74" width="22" height="5" rx="1" fill="white" opacity="0.9"/>
+            <rect x="232" y="81" width="14" height="4" rx="1" fill="white" opacity="0.6"/>
+            <rect x="270" y="12" width="116" height="201" rx="6" fill="#17212b"/>
+            <rect x="280" y="28" width="86" height="42" rx="6" fill="#2b5278" opacity="0.9"/>
+            <rect x="286" y="35" width="60" height="5" rx="1" fill="white" opacity="0.8"/>
+            <rect x="286" y="44" width="74" height="5" rx="1" fill="white" opacity="0.6"/>
+            <rect x="286" y="53" width="50" height="5" rx="1" fill="white" opacity="0.6"/>
+            <rect x="280" y="78" width="86" height="34" rx="6" fill="#182533"/>
+            <rect x="286" y="85" width="65" height="5" rx="1" fill="white" opacity="0.5"/>
+            <rect x="286" y="94" width="50" height="5" rx="1" fill="white" opacity="0.4"/>
+            <rect x="280" y="120" width="86" height="52" rx="6" fill="#2b5278" opacity="0.9"/>
+            <rect x="286" y="128" width="60" height="5" rx="1" fill="white" opacity="0.8"/>
+            <rect x="286" y="137" width="74" height="5" rx="1" fill="#3aaa6a" opacity="0.9"/>
+            <rect x="286" y="146" width="55" height="5" rx="1" fill="white" opacity="0.6"/>
+            <rect x="286" y="155" width="45" height="5" rx="1" fill="white" opacity="0.5"/>
+            <rect x="270" y="192" width="116" height="21" rx="0" fill="#1a2633"/>
+            <rect x="270" y="192" width="116" height="5" rx="0" fill="#141d26"/>
+            <rect x="278" y="199" width="60" height="8" rx="4" fill="#242f3d"/>
+          </svg>
+        </div>
+        <div class="ai-card-body">
+          <div class="ai-card-header">
+            <div class="ai-icon">📈</div>
+            <span class="ai-category" data-zh="日常工具 · Telegram Bot" data-en="Daily Tool · Telegram Bot">日常工具 · Telegram Bot</span>
+          </div>
+          <h3 class="ai-title" data-zh="AI 股價通知 Bot" data-en="AI Stock Alert Bot">AI 股價通知 Bot</h3>
+          <p class="ai-desc" data-zh="解決工作日無法即時追蹤持股的問題。透過 Claude Code 實作 Telegram Bot，自動推送每日收盤損益報告（個股 + 總和），設定到價提醒，後端加入 Cache 機制避免頻繁打 API。" data-en="Solved the problem of tracking stock positions during work hours. Built a Telegram bot via Claude Code that auto-sends daily P&L reports (per stock + total), price alerts, and uses caching to minimize API calls.">解決工作日無法即時追蹤持股的問題，透過 Claude Code 實作 Telegram Bot，自動推送每日損益報告與到價提醒。</p>
+          <div class="ai-tags">
+            <span class="tag">Claude Code</span>
+            <span class="tag">Telegram Bot</span>
+            <span class="tag" data-zh="排程 + Cache" data-en="Scheduler + Cache">排程 + Cache</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 4: Calendar -->
+      <div class="ai-card" data-project="calendar" onclick="openDetail('calendar')" role="button" tabindex="0">
+        <div class="ai-screenshot">
+          <svg class="ai-cover-svg" viewBox="0 0 400 225" xmlns="http://www.w3.org/2000/svg">
+            <rect width="400" height="225" fill="#e2dcf0"/>
+            <rect x="14" y="12" width="214" height="201" rx="6" fill="#f0edf8"/>
+            <rect x="14" y="12" width="214" height="46" rx="6" fill="#5a3a9a"/>
+            <rect x="14" y="46" width="214" height="12" fill="#5a3a9a"/>
+            <rect x="26" y="22" width="56" height="8" rx="2" fill="rgba(255,255,255,0.7)"/>
+            <rect x="26" y="34" width="36" height="5" rx="1" fill="rgba(255,255,255,0.35)"/>
+            <rect x="24" y="66" width="16" height="4" rx="1" fill="#9a88c0"/>
+            <rect x="50" y="66" width="16" height="4" rx="1" fill="#9a88c0"/>
+            <rect x="76" y="66" width="16" height="4" rx="1" fill="#9a88c0"/>
+            <rect x="102" y="66" width="16" height="4" rx="1" fill="#9a88c0"/>
+            <rect x="128" y="66" width="16" height="4" rx="1" fill="#9a88c0"/>
+            <rect x="154" y="66" width="16" height="4" rx="1" fill="#9a88c0"/>
+            <rect x="180" y="66" width="16" height="4" rx="1" fill="#9a88c0"/>
+            <rect x="24" y="78" width="16" height="14" rx="2" fill="#ddd6ee"/>
+            <rect x="50" y="78" width="16" height="14" rx="2" fill="#ddd6ee"/>
+            <rect x="76" y="78" width="16" height="14" rx="2" fill="#ddd6ee"/>
+            <rect x="102" y="78" width="16" height="14" rx="2" fill="#c45e2e" opacity="0.75"/>
+            <rect x="128" y="78" width="16" height="14" rx="2" fill="#ddd6ee"/>
+            <rect x="154" y="78" width="16" height="14" rx="2" fill="#ddd6ee"/>
+            <rect x="180" y="78" width="16" height="14" rx="2" fill="#ddd6ee"/>
+            <rect x="24" y="99" width="16" height="14" rx="2" fill="#ddd6ee"/>
+            <rect x="50" y="99" width="16" height="14" rx="2" fill="#5a3a9a" opacity="0.8"/>
+            <rect x="76" y="99" width="16" height="14" rx="2" fill="#ddd6ee"/>
+            <rect x="102" y="99" width="16" height="14" rx="2" fill="#ddd6ee"/>
+            <rect x="128" y="99" width="16" height="14" rx="2" fill="#3aaa6a" opacity="0.75"/>
+            <rect x="154" y="99" width="16" height="14" rx="2" fill="#ddd6ee"/>
+            <rect x="180" y="99" width="16" height="14" rx="2" fill="#ddd6ee"/>
+            <rect x="24" y="120" width="16" height="14" rx="2" fill="#ddd6ee"/>
+            <rect x="50" y="120" width="16" height="14" rx="2" fill="#ddd6ee"/>
+            <rect x="76" y="120" width="16" height="14" rx="2" fill="#ddd6ee"/>
+            <rect x="102" y="120" width="16" height="14" rx="2" fill="#c45e2e" opacity="0.6"/>
+            <rect x="128" y="120" width="16" height="14" rx="2" fill="#ddd6ee"/>
+            <rect x="154" y="120" width="16" height="14" rx="2" fill="#5a3a9a" opacity="0.65"/>
+            <rect x="180" y="120" width="16" height="14" rx="2" fill="#ddd6ee"/>
+            <rect x="24" y="141" width="16" height="14" rx="2" fill="#ddd6ee"/>
+            <rect x="50" y="141" width="16" height="14" rx="2" fill="#3aaa6a" opacity="0.7"/>
+            <rect x="76" y="141" width="16" height="14" rx="2" fill="#ddd6ee"/>
+            <rect x="102" y="141" width="16" height="14" rx="2" fill="#ddd6ee"/>
+            <rect x="128" y="141" width="16" height="14" rx="2" fill="#ddd6ee"/>
+            <rect x="154" y="141" width="16" height="14" rx="2" fill="#c45e2e" opacity="0.65"/>
+            <rect x="180" y="141" width="16" height="14" rx="2" fill="#ddd6ee"/>
+            <rect x="24" y="162" width="16" height="14" rx="2" fill="#ddd6ee"/>
+            <rect x="50" y="162" width="16" height="14" rx="2" fill="#ddd6ee"/>
+            <rect x="76" y="162" width="16" height="14" rx="2" fill="#5a3a9a" opacity="0.6"/>
+            <rect x="102" y="162" width="16" height="14" rx="2" fill="#ddd6ee"/>
+            <rect x="128" y="162" width="16" height="14" rx="2" fill="#ddd6ee"/>
+            <rect x="154" y="162" width="16" height="14" rx="2" fill="#ddd6ee"/>
+            <rect x="180" y="162" width="16" height="14" rx="2" fill="#3aaa6a" opacity="0.65"/>
+            <rect x="240" y="12" width="146" height="201" rx="6" fill="#313338"/>
+            <rect x="240" y="12" width="146" height="38" rx="6" fill="#2b2d31"/>
+            <rect x="240" y="38" width="146" height="12" fill="#2b2d31"/>
+            <rect x="252" y="22" width="58" height="7" rx="2" fill="rgba(255,255,255,0.48)"/>
+            <rect x="248" y="58" width="120" height="36" rx="4" fill="#5865f2" opacity="0.9"/>
+            <rect x="254" y="65" width="80" height="5" rx="1" fill="white" opacity="0.85"/>
+            <rect x="254" y="74" width="95" height="5" rx="1" fill="white" opacity="0.6"/>
+            <rect x="248" y="102" width="120" height="30" rx="4" fill="#1e2124"/>
+            <rect x="254" y="109" width="60" height="5" rx="1" fill="rgba(255,255,255,0.55)"/>
+            <rect x="254" y="118" width="95" height="5" rx="1" fill="rgba(255,255,255,0.35)"/>
+            <rect x="248" y="140" width="120" height="36" rx="4" fill="#5865f2" opacity="0.9"/>
+            <rect x="254" y="147" width="90" height="5" rx="1" fill="white" opacity="0.85"/>
+            <rect x="254" y="156" width="65" height="5" rx="1" fill="white" opacity="0.6"/>
+            <rect x="248" y="184" width="120" height="18" rx="4" fill="#1e2124"/>
+            <rect x="254" y="190" width="46" height="5" rx="1" fill="#3aaa6a" opacity="0.9"/>
+          </svg>
+        </div>
+        <div class="ai-card-body">
+          <div class="ai-card-header">
+            <div class="ai-icon">🗓️</div>
+            <span class="ai-category" data-zh="日常工具 · Discord Bot" data-en="Daily Tool · Discord Bot">日常工具 · Discord Bot</span>
+          </div>
+          <h3 class="ai-title" data-zh="Discord × Google Calendar" data-en="Discord × Google Calendar">Discord × Google Calendar</h3>
+          <p class="ai-desc" data-zh="解決多平台管理待辦事項的分散問題。在 Discord 頻道以一句自然語言即可新增行事曆事項，透過 OpenAI API 分析語意後串接 Google Calendar，自動依類型（工作/生活/約會）以不同顏色分類。" data-en="Solved fragmented task management across platforms. A single natural-language message in Discord creates a calendar event, using OpenAI API for semantic parsing and Google Calendar API for sync, with auto color-coding by event type.">在 Discord 頻道以一句自然語言即可新增行事曆事項，透過 AI 語意分析串接 Google Calendar，自動依類型分色。</p>
+          <div class="ai-tags">
+            <span class="tag">Discord Bot</span>
+            <span class="tag">OpenAI API</span>
+            <span class="tag">Google Calendar</span>
+            <span class="tag" data-zh="自然語言處理" data-en="NLP">自然語言處理</span>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /.ai-cards-row -->
+    <div class="ai-detail-below" id="ai-detail-below">
+      <div id="ai-detail-content"></div>
+    </div>
+    <div class="ai-lightbox" id="ai-lightbox" onclick="closeLightbox()">
+      <img class="ai-lightbox-img" id="ai-lightbox-img" src="" alt="" onclick="event.stopPropagation()">
+      <button class="ai-lightbox-close" onclick="closeLightbox()">✕</button>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-header">
+      <span class="section-label" data-zh="關於我" data-en="About">關於我</span>
+      <div class="section-line"></div>
+    </div>
+    <div class="about-grid">
+      <div>
+        <p class="about-intro" data-zh="近三年<br>AI 軟體 PM<br>實戰者。" data-en="3 Years<br>AI Software PM.">近三年<br>AI 軟體 PM<br>實戰者。</p>
+      </div>
+      <div>
+        <div class="about-section-label">專業背景與核心能力</div>
+        <p class="about-text">近三年軟體產品經理實戰經驗，專注於 Android 與 PWA 跨平台產品開發，擅長將商業目標轉化為清晰的技術規格，具備從 0 到 1 完整主導產品功能開發的豐富經歷。深度參與前端與後台開發流程，熟悉 RESTful API 架構，習慣在開發前期透過 Figma 製作高保真原型，有效降低溝通風險。習慣以清晰的 PRD 作為跨部門協作基礎，主導工程、設計、業務等多方討論，確保需求定義精準、時程可控。</p>
+
+        <div class="about-section-label">AI 技術應用與創新導入</div>
+        <p class="about-text">對 AI 工具與趨勢保持高度關注，具備將 AI 導入實際產品的實戰經驗。曾主導 AI TTS 功能的產品化，從無到有定義產品邏輯與用戶旅程，將語音合成技術應用於日文配音轉中文配音，成功落地實現。持續研究 LLM、Prompt Engineering、自動化推薦系統等技術趨勢，積極探索如何將這些技術應用於提升平台效能與用戶滿意度。</p>
+
+        <div class="about-section-label">數據分析與產品優化</div>
+        <p class="about-text">透過追蹤產品核心指標並分析用戶行為，持續優化內容分發與推薦邏輯，達成人均看片數量顯著提升、平均單次使用時長從 10 分鐘翻倍成長至 20 分鐘（深度參與度提升 100%）。習慣從使用行為分析出發，定義優化策略，並在上線後透過數據回饋持續迭代。</p>
+
+        <div class="about-section-label">電商、CRM 與會員系統</div>
+        <p class="about-text">從行銷企劃到 PM 職位，與客戶對接、透過用戶行為與數據判斷活動成效一直是工作核心。在 PM 任內多次主導會員系統迭代，透過切分不同類型用戶、推送差異化優惠方案，每個方案皆依據對應用戶的預期操作行為設計，在每次迭代中持續貼近用戶並鞏固商業模式。</p>
+
+        <div class="about-section-label">跨部門協作與專案管理</div>
+        <p class="about-text">習慣扮演工程、設計與業務之間的橋樑，工作方式涵蓋需求訪談、規格定義、時程控管到風險管理的完整流程。在開發前期深入理解各方利害關係人的真實需求，主動識別潛在阻礙，提前協調資源確保如期上線。熟悉敏捷開發流程，習慣使用 Notion、Google Sheets 等工具進行專案追蹤與文件管理。</p>
+
+        <div class="about-section-label">持續學習與產品熱忱</div>
+        <p class="about-text">生活中習慣留意各種產品的運作模式，時常拆解 App 的介面細節（UI/UX）與交互邏輯，思考設計背後的優缺點。對新技術抱持高度熱忱，尤其對 AI 技術在產品場景中的應用充滿期待，面對挑戰習慣主動尋求突破，樂於在快速變化的環境中學習成長。</p>
+        <div class="skills-list">
+          <span class="skill-tag" data-zh="產品策略" data-en="Product Strategy">產品策略</span>
+          <span class="skill-tag" data-zh="需求定義" data-en="Requirements">需求定義</span>
+          <span class="skill-tag" data-zh="數據分析" data-en="Data Analytics">數據分析</span>
+          <span class="skill-tag" data-zh="GA4 埋點" data-en="GA4 Tracking">GA4 埋點</span>
+          <span class="skill-tag">Prompt Engineering</span>
+          <span class="skill-tag">Claude API</span>
+          <span class="skill-tag">Figma / FigJam</span>
+          <span class="skill-tag">Notion</span>
+          <span class="skill-tag" data-zh="Replit 快速原型" data-en="Rapid Prototyping">Replit 快速原型</span>
+        </div>
+        <div style="margin-top: 32px; display: flex; flex-direction: column; gap: 10px;">
+          <a href="mailto:wxinn77@gmail.com" style="font-size: 13px; color: var(--text-secondary); text-decoration: none; display: flex; align-items: center; gap: 8px; transition: color 0.2s;" onmouseover="this.style.color='var(--text-primary)'" onmouseout="this.style.color='var(--text-secondary)'">
+            <span style="font-size: 15px;">✉</span> wxinn77@gmail.com
+          </a>
+          <a href="https://www.linkedin.com/in/xinhuiwu/" target="_blank" rel="noopener" style="font-size: 13px; color: var(--text-secondary); text-decoration: none; display: flex; align-items: center; gap: 8px; transition: color 0.2s;" onmouseover="this.style.color='var(--text-primary)'" onmouseout="this.style.color='var(--text-secondary)'">
+            <span style="font-size: 15px;">in</span> linkedin.com/in/xinhuiwu
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+</main>
+
+<footer>
+  <span data-zh="© 2026 · AI Product Manager Portfolio" data-en="© 2026 · AI Product Manager Portfolio">© 2026 · AI Product Manager Portfolio</span>
+  <span data-zh="以 Claude Code 協助製作" data-en="Built with Claude Code">以 Claude Code 協助製作</span>
+</footer>
+
+<script>
+  let currentLang = 'zh';
+
+  function setLang(lang) {
+    currentLang = lang;
+    document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+    document.querySelector(`.lang-btn[onclick="setLang('${lang}')"]`).classList.add('active');
+    document.querySelectorAll('[data-zh]').forEach(el => {
+      const text = el.getAttribute(`data-${lang}`);
+      if (text) el.innerHTML = text;
+    });
+    document.documentElement.lang = lang === 'zh' ? 'zh-TW' : 'en';
+  }
+
+  // Panel navigation
+  let currentPanel = 0;
+  const TOTAL_PANELS = 3;
+  let metricsAnimated = false;
+
+  function changePanel(dir) { goPanel(currentPanel + dir); }
+
+  function goPanel(index) {
+    if (index < 0 || index >= TOTAL_PANELS) return;
+    document.querySelectorAll('.cs-panel').forEach((p, i) => p.classList.toggle('active', i === index));
+    document.querySelectorAll('.cs-step').forEach((s, i) => s.classList.toggle('active', i === index));
+    const prev = document.getElementById('cs-prev'); if (prev) prev.disabled = index === 0;
+    const next = document.getElementById('cs-next'); if (next) next.disabled = index === TOTAL_PANELS - 1;
+    currentPanel = index;
+    if (index === 2 && !metricsAnimated) { animateMetrics(); metricsAnimated = true; }
+  }
+
+  // Detail panel system
+  const projectData = {
+    community: {
+      screenshots: ['翠柏社區_設計稿/01_首頁_Dashboard.jpg','翠柏社區_設計稿/04_抄表填寫_MeterPage.jpg','翠柏社區_設計稿/10_停車管理_ParkingPage.jpg','翠柏社區_設計稿/11_包裹查詢_PackagePage.jpg'],
+      tag: 'AI 社群平台',
+      title: '租屋社群 App — 大樓鄰里連結平台',
+      sections: [
+        {
+          heading: '背景與問題定義',
+          type: 'text',
+          body: ['租屋族普遍缺乏鄰里歸屬感，大樓公告、包裹通知、設施預約仍依賴紙本或 Line 群。物業管理效率低落，居民體驗碎片化。']
+        },
+        {
+          heading: '用戶研究',
+          type: 'list',
+          items: ['訪談 12 位租屋族，發現 83% 不認識同樓層鄰居', '物業人員平均每天處理 40+ 通重複性電話', '包裹遺失投訴佔客服量 31%']
+        },
+        {
+          heading: 'AI 解決方案設計',
+          type: 'list',
+          items: ['GPT-4 驅動的公告摘要 — 自動將長篇公告濃縮為三行重點', '智慧包裹通知 — 結合電梯監控 + 視覺辨識自動推播', '鄰里媒合推薦 — 依興趣標籤建議互助配對']
+        },
+        {
+          heading: '執行與成果',
+          type: 'list',
+          items: ['MVP 上線 6 週，DAU 達 340 人', '物業客服電話量下降 44%', '用戶 NPS 從 12 提升至 51']
+        },
+        {
+          heading: '使用工具',
+          type: 'pills',
+          items: ['Figma', 'GPT-4 API', 'Firebase', 'Miro', 'UserTesting']
+        }
+      ]
+    },
+    ga: {
+      screenshots: ['GA報表-1.png','GA報表-2.png','GA報表-3.png','GA報表-4.png'],
+      tag: 'AI 數據分析',
+      title: 'GA 自動報表 — 每日 Telegram 推播系統',
+      sections: [
+        {
+          heading: '背景與問題定義',
+          type: 'text',
+          body: ['行銷團隊每週花費 6+ 小時手動匯出 GA4 數據、製作報表、貼到群組。數據延遲 24-48 小時，決策慢半拍。']
+        },
+        {
+          heading: '需求訪談',
+          type: 'list',
+          items: ['與 5 位行銷主管深度訪談，梳理 12 個核心指標', '確認推播時機：每日 09:00 前送達，週報週一早晨', '需求：異常自動警示（流量暴跌 / 轉換率異常）']
+        },
+        {
+          heading: 'AI 自動化設計',
+          type: 'list',
+          items: ['Python + GA4 Data API 每日自動拉取數據', 'GPT-4 生成自然語言摘要，解讀趨勢而非只列數字', 'Telegram Bot 推播格式化報表，支援圖表截圖附件', '異常偵測：Z-score 演算法觸發即時警報']
+        },
+        {
+          heading: '執行與成果',
+          type: 'list',
+          items: ['每週省下 6 小時人工作業', '報表延遲從 48 小時降至 0（即時）', '行銷決策速度提升，A/B 測試迭代週期縮短 40%']
+        },
+        {
+          heading: '使用工具',
+          type: 'pills',
+          items: ['Python', 'GA4 API', 'GPT-4 API', 'Telegram Bot API', 'Google Sheets', 'Cron']
+        }
+      ]
+    },
+    stock: {
+      screenshots: ['stock-bot-1.png','stock-bot-2.png','stock-bot-3.png','stock-bot-4.png'],
+      tag: 'AI 投資助理',
+      title: '股票分析 Bot — Telegram 智慧選股助手',
+      sections: [
+        {
+          heading: '背景與問題定義',
+          type: 'text',
+          body: ['散戶投資人面對海量財報、新聞、技術指標，難以快速篩選標的。現有工具要嘛太複雜，要嘛資訊太落後。']
+        },
+        {
+          heading: '用戶痛點研究',
+          type: 'list',
+          items: ['調查 50 位散戶，68% 表示每天花超過 1 小時看財經資訊', '主要痛點：不知道哪些訊號重要、怕錯過進場時機', '期望：用自然語言問股票，像問朋友一樣']
+        },
+        {
+          heading: 'AI 功能設計',
+          type: 'list',
+          items: ['自然語言查詢 — 「最近科技股有什麼動向？」', '技術分析摘要 — RSI、MACD、布林通道自動解讀', '個股評分系統 — 財務健康度 + 籌碼面 + 技術面綜合評分', '自選股追蹤 — 突破關鍵價位即時推播']
+        },
+        {
+          heading: '執行與成果',
+          type: 'list',
+          items: ['Beta 用戶 200 人，30 日留存率 61%', '平均每日查詢 4.2 次/人', '用戶回報「節省 50 分鐘/天」的看盤時間']
+        },
+        {
+          heading: '使用工具',
+          type: 'pills',
+          items: ['Python', 'GPT-4 API', 'Yahoo Finance API', 'Telegram Bot', 'Redis', 'PostgreSQL']
+        }
+      ]
+    },
+    calendar: {
+      screenshots: ['calendar-agent-1.png','calendar-agent-2.png','calendar-agent-3.png','calendar-agent-4.png'],
+      tag: 'AI 行程助理',
+      title: '智慧行事曆 Bot — Discord 會議排程助手',
+      sections: [
+        {
+          heading: '背景與問題定義',
+          type: 'text',
+          body: ['遠端團隊跨時區協作，會議排程耗時且易出錯。來回確認時間平均佔用 23 分鐘/次，還常發生雙重預約。']
+        },
+        {
+          heading: '需求分析',
+          type: 'list',
+          items: ['觀察 3 個遠端團隊的排程流程，記錄 40+ 次會議協調過程', '痛點排序：跨時區混亂 > 行事曆碎片化 > 重複確認信', '關鍵需求：一句話完成排程，自動考量所有人的空閒時段']
+        },
+        {
+          heading: 'AI 功能設計',
+          type: 'list',
+          items: ['自然語言排程 — 「下週找三個人開 45 分鐘的 sprint review」', 'Google Calendar 整合 — 自動讀取所有人空閒時段', '時區智慧換算 — 顯示每人本地時間', 'Discord 互動確認 — Slash command + 按鈕式快速回覆']
+        },
+        {
+          heading: '執行與成果',
+          type: 'list',
+          items: ['排程時間從平均 23 分鐘降至 2 分鐘', '雙重預約事故歸零', '團隊採用率 87%，取代原有的 Doodle 流程']
+        },
+        {
+          heading: '使用工具',
+          type: 'pills',
+          items: ['Python', 'GPT-4 API', 'Google Calendar API', 'Discord Bot', 'OAuth 2.0']
+        }
+      ]
+    }
+  };
+
+  function buildDetailHTML(data) {
+    let html = `<div class="ai-detail-inner"><div class="ai-detail-top">
+      <div><div class="modal-tag">${data.tag}</div><h2 class="modal-title" style="margin-bottom:0">${data.title}</h2></div>
+      <button class="ai-detail-close" onclick="closeDetail()">✕</button>
+    </div>`;
+    if (data.screenshots && data.screenshots.length) {
+      html += `<div class="ai-detail-screenshots">`;
+      data.screenshots.forEach(src => { html += `<img src="${src}" alt="截圖" onclick="openLightbox('${src}')" title="點擊放大">`; });
+      html += `</div>`;
+    }
+    html += `<div class="ai-detail-sections">`;
+    data.sections.forEach(sec => {
+      html += `<div class="modal-section"><div class="modal-section-title">${sec.heading}</div>`;
+      if (sec.type === 'text') { sec.body.forEach(p => { html += `<p>${p}</p>`; }); }
+      else if (sec.type === 'list') { html += `<ul class="modal-list">`; sec.items.forEach(i => { html += `<li>${i}</li>`; }); html += `</ul>`; }
+      else if (sec.type === 'pills') { html += `<div class="modal-pills">`; sec.items.forEach(i => { html += `<span class="modal-pill">${i}</span>`; }); html += `</div>`; }
+      html += `</div>`;
+    });
+    html += `</div></div>`;
+    return html;
+  }
+
+  function openDetail(key) {
+    const data = projectData[key];
+    if (!data) return;
+    const row = document.getElementById('ai-cards-row');
+    const below = document.getElementById('ai-detail-below');
+    if (row.dataset.open === key) { closeDetail(); return; }
+    document.getElementById('ai-detail-content').innerHTML = buildDetailHTML(data);
+    row.dataset.open = key;
+    row.classList.add('detail-open');
+    document.querySelectorAll('.ai-card').forEach(c => c.classList.toggle('selected', c.dataset.project === key));
+    // Animate expand
+    below.style.height = '0';
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        below.style.height = document.getElementById('ai-detail-content').scrollHeight + 'px';
+      });
+    });
+    below.addEventListener('transitionend', () => {
+      if (row.dataset.open) below.style.height = 'auto';
+    }, { once: true });
+    // Scroll into view
+    setTimeout(() => { below.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }, 100);
+  }
+
+  function closeDetail() {
+    const row = document.getElementById('ai-cards-row');
+    const below = document.getElementById('ai-detail-below');
+    below.style.height = below.scrollHeight + 'px';
+    requestAnimationFrame(() => { requestAnimationFrame(() => { below.style.height = '0'; }); });
+    row.classList.remove('detail-open');
+    delete row.dataset.open;
+    document.querySelectorAll('.ai-card').forEach(c => c.classList.remove('selected'));
+  }
+
+  function openLightbox(src) {
+    document.getElementById('ai-lightbox-img').src = src;
+    document.getElementById('ai-lightbox').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    document.getElementById('ai-lightbox').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      if (document.getElementById('ai-lightbox').classList.contains('active')) closeLightbox();
+      else closeDetail();
+    }
+  });
+
+  function animateMetrics() {
+    document.querySelectorAll('.cs-result-number').forEach(el => {
+      const target = parseFloat(el.dataset.target);
+      const suffix = el.dataset.suffix || '';
+      const useComma = el.dataset.comma === 'true';
+      const triangle = el.dataset.triangle;
+      let prefix = '';
+      if (triangle === 'up') prefix = '<span style="color:#e03030;font-size:0.6em;vertical-align:middle;margin-right:2px">▲</span>';
+      else if (triangle === 'down') prefix = '<span style="color:#3d6e4e;font-size:0.6em;vertical-align:middle;margin-right:2px">▼</span>';
+      const duration = 1800;
+      const start = performance.now();
+      function tick(now) {
+        const p = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - p, 3);
+        const val = Math.floor(target * eased);
+        el.innerHTML = prefix + (useComma ? val.toLocaleString('en-US') : val) + suffix;
+        if (p < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    });
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,1698 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio — AI Product Manager</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400;1,500&family=Nunito:wght@300;400;500;600&family=Noto+Sans+TC:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #f8f4ee;
+    --warm-white: #fdfaf6;
+    --warm-dark: #2c2416;
+    --brown-mid: #7a6548;
+    --brown-light: #b09b7c;
+    --border: #e8dfd0;
+    --surface: #ffffff;
+    --surface-warm: #f4ede1;
+    --accent: #c45e2e;
+    --accent-soft: #faeee6;
+    --green: #3d6e4e;
+    --tag-bg: #ede7dc;
+    --tag-text: #7a6548;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Nunito', 'Noto Sans TC', sans-serif;
+    background: var(--cream);
+    color: var(--warm-dark);
+    font-size: 15px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* BG TEXTURE */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.025'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* HEADER */
+  header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    padding: 0 48px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(248, 244, 238, 0.88);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .logo {
+    font-family: 'Lora', serif;
+    font-size: 17px;
+    color: var(--warm-dark);
+    text-decoration: none;
+    letter-spacing: 0.01em;
+  }
+
+  .logo span {
+    color: var(--accent);
+    font-style: italic;
+  }
+
+  nav {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+  }
+
+  nav a {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--brown-mid);
+    text-decoration: none;
+    transition: color 0.2s;
+    letter-spacing: 0.02em;
+  }
+
+  nav a:hover { color: var(--warm-dark); }
+
+  .lang-toggle {
+    display: flex;
+    gap: 0;
+    background: var(--surface-warm);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    overflow: hidden;
+    padding: 2px;
+    margin-left: 4px;
+  }
+
+  .lang-btn {
+    padding: 4px 12px;
+    font-size: 11px;
+    font-weight: 600;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--brown-light);
+    border-radius: 16px;
+    transition: all 0.2s;
+    font-family: 'Nunito', sans-serif;
+    letter-spacing: 0.05em;
+  }
+
+  .lang-btn.active {
+    background: var(--warm-dark);
+    color: var(--cream);
+  }
+
+  /* HERO */
+  .hero {
+    position: relative;
+    padding: 130px 48px 80px;
+    max-width: 1140px;
+    margin: 0 auto;
+    z-index: 1;
+  }
+
+  .hero-top {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 80px;
+    align-items: end;
+  }
+
+  .hero-left {}
+
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--accent);
+    letter-spacing: 0.01em;
+    margin-bottom: 24px;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    display: block;
+    width: 28px;
+    height: 2px;
+    background: var(--accent);
+  }
+
+  .hero-title {
+    font-family: system-ui, -apple-system, sans-serif;
+    font-weight: 700;
+    font-size: clamp(40px, 5.5vw, 72px);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--warm-dark);
+    margin-bottom: 28px;
+  }
+
+  .hero-accent {
+    color: var(--accent);
+    font-style: normal;
+  }
+
+  .hero-desc {
+    font-size: 16px;
+    color: var(--brown-mid);
+    line-height: 1.8;
+    font-weight: 300;
+    max-width: 440px;
+  }
+
+  .hero-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-bottom: 8px;
+  }
+
+  .stat-card {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px 32px;
+    background: var(--warm-white);
+  }
+
+  .stat-eyebrow {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--brown-light);
+    margin-bottom: 20px;
+  }
+
+  .stat-row {
+    display: flex;
+    align-items: center;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .stat-row:last-child { border-bottom: none; padding-bottom: 0; }
+
+  .stat-label {
+    font-size: 13px;
+    color: var(--brown-mid);
+    flex: 1;
+  }
+
+  .stat-sep {
+    color: var(--border);
+    font-size: 14px;
+    padding: 0 20px;
+    flex-shrink: 0;
+  }
+
+  .stat-value {
+    font-family: system-ui, -apple-system, sans-serif;
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
+
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 40px;
+    padding: 14px 28px;
+    background: var(--warm-dark);
+    color: var(--cream);
+    border-radius: 32px;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    transition: opacity 0.2s, transform 0.2s;
+  }
+
+  .hero-cta:hover { opacity: 0.85; transform: translateY(-1px); }
+
+  /* SECTIONS */
+  .wrapper {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 48px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .section-gap { padding: 100px 0; }
+
+  .section-head {
+    margin-bottom: 56px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .section-num {
+    font-family: 'Lora', serif;
+    font-size: 13px;
+    font-style: italic;
+    color: var(--brown-light);
+  }
+
+  .section-title-text {
+    font-family: 'Lora', serif;
+    font-size: 28px;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    color: var(--warm-dark);
+  }
+
+  .section-line { flex: 1; height: 1px; background: var(--border); }
+
+  /* CASE STUDY */
+  .cs-wrapper {
+    background: var(--warm-white);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+
+  .cs-header {
+    padding: 40px 48px 32px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .cs-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--brown-mid);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: var(--tag-bg);
+    padding: 5px 12px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+  }
+
+  .cs-header-title {
+    font-family: 'Lora', serif;
+    font-size: 34px;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    color: var(--warm-dark);
+    margin-bottom: 16px;
+  }
+
+  .cs-header-desc {
+    font-size: 15px;
+    color: var(--brown-mid);
+    line-height: 1.75;
+    font-weight: 300;
+  }
+
+  /* Panel navigation */
+  .cs-panel-nav {
+    display: flex;
+    align-items: center;
+    padding: 0 48px;
+    height: 56px;
+    border-bottom: 1px solid var(--border);
+    background: var(--cream);
+  }
+
+  .cs-nav-btn { display: none; }
+
+  .cs-steps {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .cs-step {
+    font-size: 12px;
+    color: var(--brown-light);
+    cursor: pointer;
+    padding: 5px 14px;
+    border-radius: 20px;
+    border: 1px solid transparent;
+    transition: all 0.2s;
+    font-weight: 500;
+    user-select: none;
+  }
+
+  .cs-step:hover { color: var(--warm-dark); background: var(--tag-bg); }
+
+  .cs-step.active {
+    color: var(--warm-dark);
+    background: var(--tag-bg);
+    border-color: var(--border);
+  }
+
+  .cs-step-sep { display: none; }
+
+  .cs-panel { display: none; }
+  .cs-panel.active { display: block; animation: csIn 0.25s ease; }
+
+  @keyframes csIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Panel 1 – Process */
+  .cs-process-panel {
+    padding: 40px 48px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .pl-item {
+    display: flex;
+    gap: 20px;
+  }
+
+  .pl-num {
+    font-family: 'Lora', serif;
+    font-style: italic;
+    font-size: 20px;
+    color: var(--border);
+    line-height: 1.2;
+    min-width: 28px;
+    flex-shrink: 0;
+  }
+
+  .pl-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--warm-dark);
+    margin-bottom: 5px;
+  }
+
+  .pl-desc {
+    font-size: 13px;
+    color: var(--brown-mid);
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  /* Panel 2 – UI */
+  .cs-ui-panel { padding: 40px 48px; }
+
+  .cs-ui-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+
+  .cs-ui-img {
+    width: 100%;
+    aspect-ratio: 9/16;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    display: block;
+    background: var(--surface-warm);
+  }
+
+  .cs-ui-label {
+    font-size: 11px;
+    color: var(--brown-light);
+    text-align: center;
+    margin-top: 10px;
+    letter-spacing: 0.03em;
+    font-weight: 500;
+  }
+
+  .cs-ui-label.is-before {
+    color: var(--accent);
+  }
+
+  /* Panel 3 – Results */
+  .cs-results-panel {
+    padding: 52px 48px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    background: var(--accent-soft);
+  }
+
+  .cs-result-number {
+    font-family: system-ui, -apple-system, sans-serif;
+    font-size: 60px;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 12px;
+  }
+
+  .cs-result-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--warm-dark);
+    margin-bottom: 6px;
+  }
+
+  .cs-result-detail {
+    font-size: 11px;
+    color: var(--brown-light);
+    line-height: 1.6;
+  }
+
+  /* Roles */
+  .cs-roles {
+    padding: 28px 48px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .cs-role-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--brown-light);
+    margin-right: 4px;
+  }
+
+  .role-pill {
+    padding: 5px 14px;
+    background: var(--tag-bg);
+    border-radius: 20px;
+    font-size: 12px;
+    color: var(--tag-text);
+    font-weight: 500;
+  }
+
+  /* AI PROJECTS */
+  .ai-section-intro {
+    font-size: 15px;
+    color: var(--brown-mid);
+    font-style: italic;
+    font-family: 'Lora', serif;
+    margin-top: -32px;
+    margin-bottom: 40px;
+    max-width: 520px;
+  }
+
+  .ai-cards-row { display: flex; flex-wrap: wrap; gap: 16px; }
+
+  .ai-project-card {
+    background: var(--warm-white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    flex: 0 0 calc(50% - 8px);
+    cursor: pointer;
+    transition: flex-basis 0.4s ease, opacity 0.3s ease, transform 0.2s, box-shadow 0.2s;
+  }
+
+  .ai-project-card:nth-child(1) { border-top: 3px solid #c45e2e; }
+  .ai-project-card:nth-child(2) { border-top: 3px solid #3d6e4e; }
+  .ai-project-card:nth-child(3) { border-top: 3px solid #5b6eae; }
+  .ai-project-card:nth-child(4) { border-top: 3px solid #9b5ba8; }
+
+  .ai-project-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 40px rgba(44, 36, 22, 0.1);
+  }
+
+  .apc-screenshot {
+    width: 100%;
+    aspect-ratio: 16/9;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .ai-cover-svg { display: block; width: 100%; height: 100%; }
+
+  /* AI PROJECTS - below-expand design */
+  .ai-cards-row.detail-open { gap: 8px; }
+  .ai-cards-row.detail-open .ai-project-card { flex: 0 0 calc(25% - 6px); }
+  .ai-cards-row.detail-open .ai-project-card:not(.selected) { opacity: 0.5; }
+  .ai-project-card.selected { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .apc-desc, .apc-tags { max-height: 300px; overflow: hidden; opacity: 1; transition: max-height 0.35s ease, opacity 0.25s ease, margin 0.25s ease; }
+  .ai-cards-row.detail-open .apc-desc, .ai-cards-row.detail-open .apc-tags { max-height: 0; opacity: 0; margin: 0; }
+  .ai-cards-row.detail-open .apc-card-body { padding: 8px 12px; }
+  .ai-cards-row.detail-open .apc-title { font-size: 11px; line-height: 1.3; margin-bottom: 0; }
+  .ai-detail-below { height: 0; overflow: hidden; transition: height 0.45s cubic-bezier(0.4, 0, 0.2, 1); }
+  .ai-detail-inner { margin-top: 12px; padding: 32px; background: var(--warm-white); border: 1px solid var(--border); border-radius: 12px; }
+  .ai-detail-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 24px; gap: 16px; }
+  .ai-detail-close {
+    width: 28px;
+    height: 28px;
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    background: none;
+    cursor: pointer;
+    font-size: 12px;
+    color: var(--brown-mid);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: all 0.2s;
+  }
+  .ai-detail-close:hover { background: var(--surface-warm); color: var(--warm-dark); }
+  .ai-detail-screenshots { display: flex; gap: 8px; margin-bottom: 28px; padding-bottom: 28px; border-bottom: 1px solid var(--border); }
+  .ai-detail-screenshots img { flex: 1; min-width: 0; height: 160px; object-fit: cover; object-position: top center; border-radius: 8px; cursor: zoom-in; background: var(--accent-soft); transition: opacity 0.2s; }
+  .ai-detail-sections { display: grid; grid-template-columns: 1fr 1fr; gap: 0 40px; }
+  .ai-lightbox { position: fixed; inset: 0; background: rgba(0,0,0,0.92); z-index: 1000; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.2s ease; cursor: zoom-out; }
+  .ai-lightbox.active { opacity: 1; pointer-events: all; }
+  .ai-lightbox-img { max-width: 88vw; max-height: 88vh; object-fit: contain; border-radius: 6px; cursor: default; box-shadow: 0 24px 80px rgba(0,0,0,0.6); }
+  .ai-lightbox-close { position: absolute; top: 20px; right: 20px; width: 36px; height: 36px; border: 1px solid rgba(255,255,255,0.25); border-radius: 4px; background: none; cursor: pointer; font-size: 15px; color: white; display: flex; align-items: center; justify-content: center; }
+
+  .modal-tag {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    padding: 3px 10px;
+    border-radius: 20px;
+    margin-bottom: 14px;
+    opacity: 0.75;
+  }
+  .modal-title {
+    font-family: 'Lora', serif;
+    font-size: 28px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+    margin-bottom: 32px;
+    color: var(--warm-dark);
+  }
+  .modal-section { margin-bottom: 24px; padding-bottom: 24px; border-bottom: 1px solid var(--border); }
+  .modal-section:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+  .modal-section-title {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--brown-light);
+    margin-bottom: 10px;
+  }
+  .modal-section p { font-size: 14px; color: var(--brown-mid); line-height: 1.75; font-weight: 300; margin-bottom: 8px; }
+  .modal-section p:last-child { margin-bottom: 0; }
+  .modal-list { list-style: none; display: flex; flex-direction: column; gap: 7px; }
+  .modal-list li { font-size: 14px; color: var(--brown-mid); line-height: 1.65; font-weight: 300; padding-left: 16px; position: relative; }
+  .modal-list li::before { content: '—'; position: absolute; left: 0; color: var(--brown-light); }
+  .modal-pills { display: flex; flex-wrap: wrap; gap: 8px; }
+  .modal-pill { font-size: 12px; padding: 4px 12px; background: var(--tag-bg); border-radius: 20px; color: var(--tag-text); font-weight: 500; }
+
+  .apc-card-body {
+    padding: 24px;
+  }
+
+  .apc-card-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+
+  .apc-icon { display: none; }
+
+  .apc-category {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--brown-light);
+  }
+
+  .apc-title {
+    font-family: 'Lora', serif;
+    font-size: 19px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    margin-bottom: 10px;
+    color: var(--warm-dark);
+    line-height: 1.3;
+  }
+
+  .apc-desc {
+    font-size: 13px;
+    color: var(--brown-mid);
+    line-height: 1.75;
+    font-weight: 300;
+    margin-bottom: 16px;
+  }
+
+  .apc-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .apc-tag {
+    font-size: 11px;
+    padding: 3px 10px;
+    background: var(--tag-bg);
+    border-radius: 20px;
+    color: var(--tag-text);
+    font-weight: 500;
+  }
+
+  /* ABOUT */
+  .about-layout {
+    display: grid;
+    grid-template-columns: 360px 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  .about-card {
+    background: var(--warm-white);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 40px 36px;
+    position: sticky;
+    top: 80px;
+  }
+
+  .about-avatar {
+    width: 56px;
+    height: 56px;
+    background: var(--surface-warm);
+    border-radius: 50%;
+    border: 2px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+
+  .about-name {
+    font-family: 'Lora', serif;
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--warm-dark);
+    margin-bottom: 28px;
+  }
+
+  .about-role {
+    font-size: 13px;
+    color: var(--accent);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    margin-bottom: 20px;
+  }
+
+  .about-card-text {
+    font-size: 13px;
+    color: var(--brown-mid);
+    line-height: 1.75;
+    font-weight: 300;
+    margin-bottom: 28px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .about-skills {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .skill-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .skill-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--brown-light);
+    flex-shrink: 0;
+  }
+
+  .skill-name {
+    font-size: 13px;
+    color: var(--warm-dark);
+    font-weight: 400;
+  }
+
+  .about-content {}
+
+  .about-quote {
+    font-family: 'Lora', serif;
+    font-size: 24px;
+    font-style: italic;
+    color: var(--warm-dark);
+    line-height: 1.5;
+    margin-bottom: 32px;
+    padding-left: 24px;
+    border-left: 3px solid var(--accent);
+  }
+
+  .about-para {
+    font-size: 15px;
+    color: var(--brown-mid);
+    line-height: 1.85;
+    font-weight: 300;
+    margin-bottom: 20px;
+  }
+
+  .about-para:last-child { margin-bottom: 0; }
+
+  .about-section-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--brown-light);
+    margin-bottom: 8px;
+    margin-top: 28px;
+  }
+  .about-section-label:first-child { margin-top: 0; }
+
+  /* CONTACT */
+  .contact-area {
+    background: var(--warm-dark);
+    border-radius: 20px;
+    padding: 64px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 64px;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .contact-area::before {
+    content: '';
+    position: absolute;
+    top: -60px;
+    right: -60px;
+    width: 220px;
+    height: 220px;
+    background: radial-gradient(circle, rgba(196,94,46,0.25), transparent 70%);
+    border-radius: 50%;
+  }
+
+  .contact-eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+
+  .contact-headline {
+    font-family: 'Lora', serif;
+    font-size: 38px;
+    font-weight: 500;
+    color: var(--cream);
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+  }
+
+  .contact-sub {
+    margin-top: 16px;
+    font-size: 14px;
+    color: rgba(248,244,238,0.5);
+    font-weight: 300;
+  }
+
+  .contact-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .contact-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 24px;
+    background: rgba(248,244,238,0.08);
+    border: 1px solid rgba(248,244,238,0.15);
+    border-radius: 10px;
+    color: var(--cream);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    white-space: nowrap;
+    transition: background 0.2s, border-color 0.2s;
+  }
+
+  .contact-btn:hover {
+    background: rgba(248,244,238,0.14);
+    border-color: rgba(248,244,238,0.3);
+  }
+
+  .contact-btn-icon { font-size: 15px; }
+
+  /* FOOTER */
+  footer {
+    padding: 32px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1140px;
+    margin: 0 auto;
+  }
+
+  footer span {
+    font-size: 12px;
+    color: var(--brown-light);
+  }
+
+  /* DIVIDER */
+  .wrapper-divider {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 48px;
+  }
+
+  .divider-line {
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* MOBILE */
+  @media (max-width: 768px) {
+    header { padding: 0 20px; }
+    nav a { display: none; }
+    .hero { padding: 100px 20px 60px; }
+    .hero-top { grid-template-columns: 1fr; gap: 40px; }
+    .wrapper { padding: 0 20px; }
+    .section-gap { padding: 60px 0; }
+    .cs-header { padding: 24px; }
+    .cs-panel-nav { padding: 0 16px; }
+    .cs-steps { gap: 4px; }
+    .cs-step { padding: 3px 8px; font-size: 11px; }
+    .cs-process-panel { padding: 24px; }
+    .cs-ui-panel { padding: 24px; }
+    .cs-ui-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .cs-results-panel { grid-template-columns: 1fr; padding: 24px; gap: 24px; }
+    .cs-result-number { font-size: 48px; }
+    .cs-roles { padding: 20px 24px; }
+    .ai-cards-row .ai-project-card { flex: 0 0 100%; }
+    .ai-cards-row.detail-open .ai-project-card { flex: 0 0 calc(50% - 4px); }
+    .about-layout { grid-template-columns: 1fr; }
+    .about-card { position: static; }
+    .contact-area { grid-template-columns: 1fr; padding: 40px; }
+    footer { flex-direction: column; gap: 8px; padding: 24px 20px; }
+    .wrapper-divider { padding: 0 20px; }
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-eyebrow { animation: fadeIn 0.7s ease both; animation-delay: 0.1s; }
+  .hero-title { animation: fadeIn 0.7s ease both; animation-delay: 0.2s; }
+  .hero-desc { animation: fadeIn 0.7s ease both; animation-delay: 0.3s; }
+  .hero-cta { animation: fadeIn 0.7s ease both; animation-delay: 0.4s; }
+  .hero-right { animation: fadeIn 0.7s ease both; animation-delay: 0.35s; }
+</style>
+</head>
+<body>
+
+<header>
+  <a href="#" class="logo"></a>
+  <nav>
+    <a href="#work" data-zh="作品" data-en="Work">作品</a>
+    <a href="#about" data-zh="關於" data-en="About">關於</a>
+    <div class="lang-toggle">
+      <button class="lang-btn active" onclick="setLang('zh')">ZH</button>
+      <button class="lang-btn" onclick="setLang('en')">EN</button>
+    </div>
+  </nav>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-top">
+    <div class="hero-left">
+      <p class="hero-eyebrow" data-zh="AI Product Manager" data-en="AI Product Manager">AI Product Manager</p>
+      <h1 class="hero-title" data-zh="讓<span class='hero-accent'>AI</span><br>融入在生活之中" data-en="Weaving <span class='hero-accent'>AI</span><br>into everyday life">讓<span class="hero-accent">AI</span><br>融入在生活之中</h1>
+      <p class="hero-desc" data-zh="不再只是 teller，而是正在成為 builder 的路上。" data-en="No longer just a teller — on the path to becoming a builder.">不再只是 teller，而是正在成為 builder 的路上。</p>
+    </div>
+    <div class="hero-right">
+      <div class="stat-card">
+        <div class="stat-eyebrow" data-zh="個人亮點" data-en="Highlights">個人亮點</div>
+        <div class="stat-row">
+          <span class="stat-label" data-zh="尊貴會員年成長" data-en="Premium Member Growth">尊貴會員年成長</span>
+          <span class="stat-sep">|</span>
+          <span class="stat-value"><span style="color:#e03030;font-size:0.6em;vertical-align:middle;margin-right:2px">▲</span>30%</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label" data-zh="平均看片率提升" data-en="Avg. Watch Rate Growth">平均看片率提升</span>
+          <span class="stat-sep">|</span>
+          <span class="stat-value"><span style="color:#e03030;font-size:0.6em;vertical-align:middle;margin-right:2px">▲</span>66%</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="wrapper-divider"><div class="divider-line"></div></div>
+
+<!-- WORK -->
+<div class="wrapper">
+  <div class="section-gap" id="work">
+    <div class="section-head">
+      <span class="section-title-text" data-zh="過去帶領專案" data-en="Past Projects Led">過去帶領專案</span>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="cs-wrapper">
+      <!-- Header -->
+      <div class="cs-header">
+        <span class="cs-kicker" data-zh="影音 App · 搜尋功能改版" data-en="Video App · Search Redesign">影音 App · 搜尋功能改版</span>
+        <h2 class="cs-header-title" data-zh="搜尋頁改版：熱搜推薦即時化" data-en="Search Page Redesign: Real-time Trending">搜尋頁改版：熱搜推薦即時化</h2>
+        <p class="cs-header-desc" data-zh="原始痛點：舊版熱搜依累積搜尋量排序，更新頻率低，過時關鍵字佔據熱門位置。改版導入時效性權重機制，以 8 小時對比 7 天平均成長率動態計算，每 5 分鐘刷新，即時反映用戶真實搜尋意圖。" data-en="Pain point: The old trending search relied on cumulative volume with infrequent updates, letting stale keywords dominate. The redesign introduced time-weighted trending — 8-hour volume vs. 7-day daily average — refreshing every 5 minutes to mirror actual user intent.">原始痛點：舊版熱搜依累積搜尋量排序，更新頻率低，過時關鍵字佔據熱門位置。改版導入時效性權重機制，以 8 小時對比 7 天平均成長率動態計算，每 5 分鐘刷新，即時反映用戶真實搜尋意圖。</p>
+      </div>
+
+      <!-- Panel Navigation -->
+      <div class="cs-panel-nav">
+        <button class="cs-nav-btn" id="cs-prev" onclick="changePanel(-1)" disabled>&#8592;</button>
+        <div class="cs-steps">
+          <span class="cs-step active" onclick="goPanel(0)" data-zh="思考流程" data-en="Process">思考流程</span>
+          <span class="cs-step-sep">›</span>
+          <span class="cs-step" onclick="goPanel(1)" data-zh="UI 演變" data-en="UI Changes">UI 演變</span>
+          <span class="cs-step-sep">›</span>
+          <span class="cs-step" onclick="goPanel(2)" data-zh="上線成效" data-en="Results">上線成效</span>
+        </div>
+        <button class="cs-nav-btn" id="cs-next" onclick="changePanel(1)">&#8594;</button>
+      </div>
+
+      <!-- Panel 1: Process -->
+      <div class="cs-panel active" id="cs-panel-0">
+        <div class="cs-process-panel">
+          <div class="pl-item">
+            <span class="pl-num">1</span>
+            <div>
+              <div class="pl-title" data-zh="找到問題的根源" data-en="Finding the Root Cause">找到問題的根源</div>
+              <div class="pl-desc" data-zh="不只是「熱搜不準」，更深層的問題是：累積量排序讓舊資料有先天優勢，新話題無法浮現。頁面同時展示四個區塊也造成用戶認知負擔過高。" data-en="Not just 'trending is inaccurate' — the deeper issue was cumulative ranking giving stale data structural advantages. Simultaneously displaying four content blocks also created excessive cognitive load.">不只是「熱搜不準」，更深層的問題是：累積量排序讓舊資料有先天優勢，新話題無法浮現。頁面同時展示四個區塊也造成用戶認知負擔過高。</div>
+            </div>
+          </div>
+          <div class="pl-item">
+            <span class="pl-num">2</span>
+            <div>
+              <div class="pl-title" data-zh="設計後端篩選邏輯" data-en="Designing Backend Logic">設計後端篩選邏輯</div>
+              <div class="pl-desc" data-zh="定義成長率公式（最近 8 小時 ÷ 7 天每日平均），訂定 7 項關鍵字過濾規則，設計防資料不足的 fallback 邏輯，確保任何情境都能提供 5 個有效關鍵字。" data-en="Defined the growth rate formula (8h ÷ 7d daily avg), established 7 keyword filtering rules, and designed fallback logic to ensure 5 valid keywords are always surfaced regardless of data availability.">定義成長率公式（最近 8 小時 ÷ 7 天每日平均），訂定 7 項關鍵字過濾規則，設計防資料不足的 fallback 邏輯，確保任何情境都能提供 5 個有效關鍵字。</div>
+            </div>
+          </div>
+          <div class="pl-item">
+            <span class="pl-num">3</span>
+            <div>
+              <div class="pl-title" data-zh="重構使用者流程" data-en="Restructuring User Flow">重構使用者流程</div>
+              <div class="pl-desc" data-zh="將歷史搜尋後移至鍵盤展開時才出現——這個時機點用戶已準備好輸入，更需要回顧過去的搜尋。搜尋主頁應展示平台推薦的內容，而非用戶自己的歷史。" data-en="Moved search history to appear only when the keyboard activates — at that moment, the user is ready to type and genuinely needs to reference past searches. The main search screen should showcase platform recommendations, not personal history.">將歷史搜尋後移至鍵盤展開時才出現——這個時機點用戶已準備好輸入，更需要回顧過去的搜尋。搜尋主頁應展示平台推薦的內容，而非用戶自己的歷史。</div>
+            </div>
+          </div>
+          <div class="pl-item">
+            <span class="pl-num">4</span>
+            <div>
+              <div class="pl-title" data-zh="用數據驗證每個決策" data-en="Validating Every Decision with Data">用數據驗證每個決策</div>
+              <div class="pl-desc" data-zh="規劃完整的 GA4 埋點路徑，設定搜尋頁 PV、關鍵字點擊數、無結果比例為核心指標，上線後每週追蹤，確保數字反映了真實的用戶行為改善。" data-en="Designed comprehensive GA4 tracking, set PV, keyword clicks, and zero-result rate as core metrics, and monitored weekly post-launch to ensure numbers reflected genuine UX improvement.">規劃完整的 GA4 埋點路徑，設定搜尋頁 PV、關鍵字點擊數、無結果比例為核心指標，上線後每週追蹤，確保數字反映了真實的用戶行為改善。</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Panel 2: UI Screenshots -->
+      <div class="cs-panel" id="cs-panel-1">
+        <div class="cs-ui-panel">
+          <div class="cs-ui-grid">
+            <div>
+              <img src="搜尋頁改版_原始畫面.png" alt="改版前" class="cs-ui-img">
+              <div class="cs-ui-label is-before" data-zh="改版前" data-en="Before">改版前</div>
+            </div>
+            <div>
+              <img src="搜尋頁改版_推薦3.png" alt="熱搜推薦" class="cs-ui-img">
+              <div class="cs-ui-label" data-zh="熱搜推薦" data-en="Trending">熱搜推薦</div>
+            </div>
+            <div>
+              <img src="搜尋頁改版_歷史搜尋.png" alt="歷史搜尋" class="cs-ui-img">
+              <div class="cs-ui-label" data-zh="歷史搜尋" data-en="History">歷史搜尋</div>
+            </div>
+            <div>
+              <img src="搜尋頁改版_關鍵字搜尋(有鍵盤).png" alt="關鍵字搜尋" class="cs-ui-img">
+              <div class="cs-ui-label" data-zh="關鍵字搜尋" data-en="Keyword Search">關鍵字搜尋</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Panel 3: Results with animation -->
+      <div class="cs-panel" id="cs-panel-2">
+        <div class="cs-results-panel">
+          <div>
+            <div class="cs-result-number" data-target="74" data-triangle="up" data-suffix="%">0%</div>
+            <div class="cs-result-name" data-zh="搜尋頁 PV 成長" data-en="Search Page PV">搜尋頁 PV 成長</div>
+            <div class="cs-result-detail" data-zh="週均從 10,000–12,000 成長至 21,257" data-en="Weekly avg: 10K–12K → 21,257">週均從 10,000–12,000 成長至 21,257</div>
+          </div>
+          <div>
+            <div class="cs-result-number" data-target="43" data-triangle="down" data-suffix="%">0%</div>
+            <div class="cs-result-name" data-zh="搜尋無結果比例" data-en="Zero-Result Rate">搜尋無結果比例</div>
+            <div class="cs-result-detail" data-zh="從 39–43% 降至 22.66%，搜尋精準度大幅改善" data-en="Dropped from 39–43% to 22.66%, significant improvement">從 39–43% 降至 22.66%，搜尋精準度大幅改善</div>
+          </div>
+          <div>
+            <div class="cs-result-number" data-target="21516" data-suffix="" data-comma="true">0</div>
+            <div class="cs-result-name" data-zh="日均關鍵字點擊" data-en="Daily Keyword Clicks">日均關鍵字點擊</div>
+            <div class="cs-result-detail" data-zh="幾乎每位用戶都使用一次熱搜功能" data-en="Near 1:1 user-to-click ratio">幾乎每位用戶都使用一次熱搜功能</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Roles -->
+      <div class="cs-roles">
+        <span class="cs-role-label" data-zh="我的角色" data-en="My Role">我的角色</span>
+        <span class="role-pill" data-zh="需求定義" data-en="Requirements">需求定義</span>
+        <span class="role-pill" data-zh="後端邏輯設計" data-en="Backend Logic">後端邏輯設計</span>
+        <span class="role-pill" data-zh="設計師 / RD 協作" data-en="Cross-team Collaboration">設計師 / RD 協作</span>
+        <span class="role-pill" data-zh="測試 & Bug 追蹤" data-en="Testing & Bug Tracking">測試 & Bug 追蹤</span>
+        <span class="role-pill" data-zh="GA4 數據埋點" data-en="GA4 Analytics">GA4 數據埋點</span>
+      </div>
+    </div>
+
+    <!-- AI PROJECTS -->
+    <div class="section-head" style="margin-top: 80px;">
+      <span class="section-title-text" data-zh="AI 自製專案" data-en="AI Projects">AI 自製專案</span>
+      <div class="section-line"></div>
+    </div>
+
+    <p class="ai-section-intro" data-zh="這些是我用 AI 幫自己解決問題的過程——找痛點、定需求、做出來、然後真的在用。" data-en="These are projects where I used AI to solve my own problems — find the pain point, define requirements, build it, and actually use it.">這些是我用 AI 幫自己解決問題的過程——找痛點、定需求、做出來、然後真的在用。</p>
+
+    <div class="ai-cards-row" id="ai-cards-row">
+      <div class="ai-project-card" data-project="community" onclick="openDetail('community')" role="button" tabindex="0">
+        <div class="apc-screenshot">
+          <svg class="ai-cover-svg" viewBox="0 0 400 225" xmlns="http://www.w3.org/2000/svg">
+            <rect width="400" height="225" fill="#faeee6"/>
+            <!-- Sky -->
+            <rect width="400" height="140" fill="#f5e6d8"/>
+            <!-- Ground -->
+            <rect y="140" width="400" height="85" fill="#ede0ce"/>
+            <!-- Main building -->
+            <rect x="130" y="45" width="140" height="110" fill="#d4bfa6" rx="2"/>
+            <!-- Building shading -->
+            <rect x="130" y="45" width="6" height="110" fill="#c4ae97"/>
+            <!-- Windows grid main building -->
+            <rect x="148" y="62" width="18" height="14" fill="#3d6e4e" rx="1" opacity="0.85"/>
+            <rect x="176" y="62" width="18" height="14" fill="#3d6e4e" rx="1" opacity="0.85"/>
+            <rect x="204" y="62" width="18" height="14" fill="#faeee6" rx="1" opacity="0.6"/>
+            <rect x="232" y="62" width="18" height="14" fill="#3d6e4e" rx="1" opacity="0.85"/>
+            <rect x="148" y="86" width="18" height="14" fill="#faeee6" rx="1" opacity="0.6"/>
+            <rect x="176" y="86" width="18" height="14" fill="#3d6e4e" rx="1" opacity="0.85"/>
+            <rect x="204" y="86" width="18" height="14" fill="#3d6e4e" rx="1" opacity="0.85"/>
+            <rect x="232" y="86" width="18" height="14" fill="#faeee6" rx="1" opacity="0.6"/>
+            <rect x="148" y="110" width="18" height="14" fill="#3d6e4e" rx="1" opacity="0.85"/>
+            <rect x="176" y="110" width="18" height="14" fill="#faeee6" rx="1" opacity="0.6"/>
+            <rect x="204" y="110" width="18" height="14" fill="#3d6e4e" rx="1" opacity="0.85"/>
+            <rect x="232" y="110" width="18" height="14" fill="#3d6e4e" rx="1" opacity="0.85"/>
+            <!-- Door -->
+            <rect x="186" y="125" width="28" height="30" fill="#b09b7c" rx="1"/>
+            <circle cx="210" cy="141" r="2" fill="#d4bfa6"/>
+            <!-- Left side building -->
+            <rect x="60" y="70" width="75" height="85" fill="#c9b49b" rx="2"/>
+            <rect x="72" y="82" width="14" height="11" fill="#3d6e4e" rx="1" opacity="0.7"/>
+            <rect x="96" y="82" width="14" height="11" fill="#faeee6" rx="1" opacity="0.5"/>
+            <rect x="116" y="82" width="14" height="11" fill="#3d6e4e" rx="1" opacity="0.7"/>
+            <rect x="72" y="101" width="14" height="11" fill="#faeee6" rx="1" opacity="0.5"/>
+            <rect x="96" y="101" width="14" height="11" fill="#3d6e4e" rx="1" opacity="0.7"/>
+            <rect x="116" y="101" width="14" height="11" fill="#3d6e4e" rx="1" opacity="0.7"/>
+            <rect x="82" y="122" width="20" height="23" fill="#a8906e" rx="1"/>
+            <!-- Right side building -->
+            <rect x="265" y="75" width="70" height="80" fill="#c9b49b" rx="2"/>
+            <rect x="277" y="87" width="13" height="10" fill="#3d6e4e" rx="1" opacity="0.7"/>
+            <rect x="298" y="87" width="13" height="10" fill="#faeee6" rx="1" opacity="0.5"/>
+            <rect x="315" y="87" width="13" height="10" fill="#3d6e4e" rx="1" opacity="0.7"/>
+            <rect x="277" y="105" width="13" height="10" fill="#faeee6" rx="1" opacity="0.5"/>
+            <rect x="298" y="105" width="13" height="10" fill="#3d6e4e" rx="1" opacity="0.7"/>
+            <rect x="315" y="105" width="13" height="10" fill="#3d6e4e" rx="1" opacity="0.7"/>
+            <rect x="281" y="122" width="18" height="23" fill="#a8906e" rx="1"/>
+            <!-- Trees -->
+            <ellipse cx="40" cy="142" rx="18" ry="22" fill="#3d6e4e" opacity="0.7"/>
+            <rect x="38" y="155" width="4" height="10" fill="#7a6548"/>
+            <ellipse cx="358" cy="140" rx="15" ry="19" fill="#3d6e4e" opacity="0.7"/>
+            <rect x="356" y="152" width="4" height="9" fill="#7a6548"/>
+            <ellipse cx="360" cy="138" rx="12" ry="15" fill="#3d6e4e" opacity="0.5"/>
+            <!-- Path -->
+            <path d="M170 155 L200 155 L220 225 L150 225 Z" fill="#c8b49a" opacity="0.6"/>
+            <!-- Notification bubble -->
+            <rect x="290" y="32" width="90" height="34" fill="#c45e2e" rx="6"/>
+            <text x="306" y="45" font-family="system-ui,sans-serif" font-size="8" fill="white" font-weight="600">包裹已送達</text>
+            <text x="306" y="57" font-family="system-ui,sans-serif" font-size="7" fill="rgba(255,255,255,0.8)">1F 大廳 · 剛剛</text>
+            <polygon points="310,66 320,66 315,74" fill="#c45e2e"/>
+          </svg>
+        </div>
+        <div class="apc-card-body">
+          <div class="apc-card-header">
+            <span class="apc-icon">🏢</span>
+            <div class="apc-category" data-zh="MVP · Replit" data-en="MVP · Replit">MVP · Replit</div>
+          </div>
+          <h3 class="apc-title" data-zh="社區管理 App" data-en="Community Management App">社區管理 App</h3>
+          <p class="apc-desc" data-zh="住在社區型大樓，發現一天裡有太多事情分散在不同地方。以商業模式與用戶路徑為 Prompt，透過 AI 快速產出 Wireframe 與程式碼原型，設計雙邊收費模型。" data-en="Living in a residential building, I noticed too many things were scattered. Used business model and user flows as prompts to rapidly generate wireframes and code, designing a two-sided revenue model.">住在社區型大樓，發現一天裡有太多事情分散在不同地方。以商業模式與用戶路徑為 Prompt，透過 AI 快速產出 Wireframe 與程式碼原型，設計雙邊收費模型。</p>
+          <div class="apc-tags">
+            <span class="apc-tag">Replit</span>
+            <span class="apc-tag">Prompt Engineering</span>
+            <span class="apc-tag" data-zh="商業模式設計" data-en="Business Model">商業模式設計</span>
+            <span class="apc-tag" data-zh="數據埋點" data-en="Analytics Design">數據埋點</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="ai-project-card" data-project="ga" onclick="openDetail('ga')" role="button" tabindex="0">
+        <div class="apc-screenshot">
+          <svg class="ai-cover-svg" viewBox="0 0 400 225" xmlns="http://www.w3.org/2000/svg">
+            <rect width="400" height="225" fill="#e8f0ec"/>
+            <!-- Dark header bar -->
+            <rect width="400" height="44" fill="#1a2e22"/>
+            <circle cx="20" cy="22" r="6" fill="#3d6e4e" opacity="0.6"/>
+            <text x="34" y="26" font-family="system-ui,sans-serif" font-size="10" fill="white" font-weight="600">GA Analytics Report</text>
+            <text x="330" y="26" font-family="system-ui,sans-serif" font-size="9" fill="#a0c4b0">週報 · 05/12</text>
+            <!-- Metric cards row -->
+            <rect x="16" y="56" width="82" height="46" fill="white" rx="4"/>
+            <text x="26" y="73" font-family="system-ui,sans-serif" font-size="8" fill="#6b8f7a">活躍用戶</text>
+            <text x="26" y="91" font-family="system-ui,sans-serif" font-size="16" fill="#1a2e22" font-weight="700">24,381</text>
+            <rect x="108" y="56" width="82" height="46" fill="white" rx="4"/>
+            <text x="118" y="73" font-family="system-ui,sans-serif" font-size="8" fill="#6b8f7a">轉換率</text>
+            <text x="118" y="91" font-family="system-ui,sans-serif" font-size="16" fill="#3d6e4e" font-weight="700">3.84%</text>
+            <rect x="200" y="56" width="82" height="46" fill="white" rx="4"/>
+            <text x="210" y="73" font-family="system-ui,sans-serif" font-size="8" fill="#6b8f7a">跳出率</text>
+            <text x="210" y="91" font-family="system-ui,sans-serif" font-size="16" fill="#c45e2e" font-weight="700">42.1%</text>
+            <rect x="292" y="56" width="92" height="46" fill="white" rx="4"/>
+            <text x="302" y="73" font-family="system-ui,sans-serif" font-size="8" fill="#6b8f7a">平均停留</text>
+            <text x="302" y="91" font-family="system-ui,sans-serif" font-size="16" fill="#1a2e22" font-weight="700">3m 12s</text>
+            <!-- Bar chart -->
+            <rect x="16" y="114" width="264" height="96" fill="white" rx="4"/>
+            <!-- Chart bars -->
+            <rect x="36" y="175" width="16" height="22" fill="#3d6e4e" opacity="0.5" rx="1"/>
+            <rect x="60" y="163" width="16" height="34" fill="#3d6e4e" opacity="0.6" rx="1"/>
+            <rect x="84" y="155" width="16" height="42" fill="#3d6e4e" opacity="0.7" rx="1"/>
+            <rect x="108" y="145" width="16" height="52" fill="#3d6e4e" opacity="0.8" rx="1"/>
+            <rect x="132" y="158" width="16" height="39" fill="#3d6e4e" opacity="0.7" rx="1"/>
+            <rect x="156" y="140" width="16" height="57" fill="#3d6e4e" rx="1"/>
+            <rect x="180" y="148" width="16" height="49" fill="#3d6e4e" opacity="0.8" rx="1"/>
+            <rect x="204" y="134" width="16" height="63" fill="#3d6e4e" rx="1"/>
+            <rect x="228" y="143" width="16" height="54" fill="#3d6e4e" opacity="0.9" rx="1"/>
+            <rect x="252" y="128" width="16" height="69" fill="#c45e2e" rx="1"/>
+            <!-- Trend line -->
+            <polyline points="44,172 68,161 92,153 116,143 140,156 164,138 188,146 212,132 236,141 260,126" stroke="#c45e2e" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <!-- Axis labels -->
+            <text x="24" y="210" font-family="system-ui,sans-serif" font-size="7" fill="#6b8f7a">週一</text>
+            <text x="108" y="210" font-family="system-ui,sans-serif" font-size="7" fill="#6b8f7a">週四</text>
+            <text x="244" y="210" font-family="system-ui,sans-serif" font-size="7" fill="#6b8f7a">週日</text>
+            <!-- Telegram notification -->
+            <rect x="290" y="114" width="94" height="96" fill="#1a2e22" rx="4"/>
+            <text x="302" y="130" font-family="system-ui,sans-serif" font-size="7.5" fill="white" font-weight="600">Telegram 推播</text>
+            <rect x="298" y="136" width="78" height="34" fill="#2a3f2e" rx="3"/>
+            <text x="304" y="148" font-family="system-ui,sans-serif" font-size="7" fill="#a0c4b0">📊 週報已送出</text>
+            <text x="304" y="159" font-family="system-ui,sans-serif" font-size="6.5" fill="#6b8f7a">轉換率 ↑ 0.3%</text>
+            <text x="304" y="169" font-family="system-ui,sans-serif" font-size="6.5" fill="#6b8f7a">流量異常警示</text>
+            <rect x="298" y="176" width="78" height="26" fill="#2a3f2e" rx="3"/>
+            <text x="304" y="189" font-family="system-ui,sans-serif" font-size="6.5" fill="#c45e2e">⚠ 跳出率偏高</text>
+            <text x="304" y="199" font-family="system-ui,sans-serif" font-size="6.5" fill="#6b8f7a">需檢查落地頁</text>
+          </svg>
+        </div>
+        <div class="apc-card-body">
+          <div class="apc-card-header">
+            <span class="apc-icon">📊</span>
+            <div class="apc-category" data-zh="自動化 · Claude API" data-en="Automation · Claude API">自動化 · Claude API</div>
+          </div>
+          <h3 class="apc-title" data-zh="GA 自動分析報表" data-en="GA Auto-Report Generator">GA 自動分析報表</h3>
+          <p class="apc-desc" data-zh="設計三層 Pipeline，串接 Claude API 產出中文分析，自動輸出含圖表的 HTML 報表，設定每週排程與 Telegram 異常通報。" data-en="Designed a 3-layer pipeline, integrated Claude API for Chinese insights, auto-generates chart-embedded HTML reports with weekly scheduling and Telegram anomaly alerts.">設計三層 Pipeline，串接 Claude API 產出中文分析，自動輸出含圖表的 HTML 報表，設定每週排程與 Telegram 異常通報。</p>
+          <div class="apc-tags">
+            <span class="apc-tag">Claude API</span>
+            <span class="apc-tag">Python Pipeline</span>
+            <span class="apc-tag">GA4</span>
+            <span class="apc-tag">Telegram</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="ai-project-card" data-project="stock" onclick="openDetail('stock')" role="button" tabindex="0">
+        <div class="apc-screenshot">
+          <svg class="ai-cover-svg" viewBox="0 0 400 225" xmlns="http://www.w3.org/2000/svg">
+            <rect width="400" height="225" fill="#e8ecf4"/>
+            <!-- Left: stock chart panel -->
+            <rect x="0" y="0" width="210" height="225" fill="#f0f4f8"/>
+            <rect x="0" y="0" width="210" height="36" fill="#1a2438"/>
+            <text x="14" y="22" font-family="system-ui,sans-serif" font-size="10" fill="white" font-weight="600">台積電 2330</text>
+            <text x="14" y="32" font-family="system-ui,sans-serif" font-size="8" fill="#7b9fc4">+1.8% · 今日</text>
+            <!-- Price area fill -->
+            <defs>
+              <linearGradient id="stockGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#4a7bc8" stop-opacity="0.25"/>
+                <stop offset="100%" stop-color="#4a7bc8" stop-opacity="0.02"/>
+              </linearGradient>
+            </defs>
+            <path d="M14,148 L38,136 L62,140 L86,120 L110,128 L134,108 L158,116 L182,96 L196,90 L196,185 L14,185 Z" fill="url(#stockGrad)"/>
+            <!-- Price line -->
+            <polyline points="14,148 38,136 62,140 86,120 110,128 134,108 158,116 182,96 196,90" stroke="#4a7bc8" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <!-- Candlesticks -->
+            <rect x="26" y="138" width="6" height="10" fill="#3d6e4e" rx="0.5"/>
+            <line x1="29" y1="135" x2="29" y2="150" stroke="#3d6e4e" stroke-width="1"/>
+            <rect x="50" y="140" width="6" height="9" fill="#c45e2e" rx="0.5"/>
+            <line x1="53" y1="137" x2="53" y2="152" stroke="#c45e2e" stroke-width="1"/>
+            <rect x="74" y="122" width="6" height="12" fill="#3d6e4e" rx="0.5"/>
+            <line x1="77" y1="118" x2="77" y2="136" stroke="#3d6e4e" stroke-width="1"/>
+            <rect x="98" y="126" width="6" height="10" fill="#3d6e4e" rx="0.5"/>
+            <line x1="101" y1="122" x2="101" y2="138" stroke="#3d6e4e" stroke-width="1"/>
+            <rect x="122" y="108" width="6" height="14" fill="#3d6e4e" rx="0.5"/>
+            <line x1="125" y1="104" x2="125" y2="124" stroke="#3d6e4e" stroke-width="1"/>
+            <rect x="146" y="114" width="6" height="11" fill="#c45e2e" rx="0.5"/>
+            <line x1="149" y1="110" x2="149" y2="127" stroke="#c45e2e" stroke-width="1"/>
+            <rect x="170" y="94" width="6" height="16" fill="#3d6e4e" rx="0.5"/>
+            <line x1="173" y1="90" x2="173" y2="112" stroke="#3d6e4e" stroke-width="1"/>
+            <!-- Price label -->
+            <rect x="158" y="78" width="46" height="16" fill="#4a7bc8" rx="2"/>
+            <text x="164" y="90" font-family="system-ui,sans-serif" font-size="8" fill="white" font-weight="600">$1,042</text>
+            <!-- Volume bars -->
+            <rect x="14" y="190" width="6" height="10" fill="#4a7bc8" opacity="0.4" rx="0.5"/>
+            <rect x="26" y="188" width="6" height="12" fill="#4a7bc8" opacity="0.4" rx="0.5"/>
+            <rect x="38" y="192" width="6" height="8" fill="#4a7bc8" opacity="0.4" rx="0.5"/>
+            <rect x="50" y="186" width="6" height="14" fill="#4a7bc8" opacity="0.4" rx="0.5"/>
+            <rect x="62" y="190" width="6" height="10" fill="#4a7bc8" opacity="0.4" rx="0.5"/>
+            <!-- Right: Telegram dark panel -->
+            <rect x="210" y="0" width="190" height="225" fill="#17212b"/>
+            <rect x="210" y="0" width="190" height="40" fill="#232e3c"/>
+            <circle cx="228" cy="20" r="10" fill="#4a7bc8" opacity="0.8"/>
+            <text x="224" y="25" font-family="system-ui,sans-serif" font-size="9" fill="white" font-weight="700">S</text>
+            <text x="244" y="17" font-family="system-ui,sans-serif" font-size="9" fill="white" font-weight="600">StockBot</text>
+            <text x="244" y="29" font-family="system-ui,sans-serif" font-size="7" fill="#7b9fc4">● 線上</text>
+            <!-- Chat messages -->
+            <rect x="222" y="52" width="110" height="38" fill="#2b5278" rx="6" rx="6"/>
+            <text x="232" y="66" font-family="system-ui,sans-serif" font-size="7.5" fill="white">📊 收盤報告</text>
+            <text x="232" y="78" font-family="system-ui,sans-serif" font-size="7" fill="#a8c8e8">台積電 +1.8% ▲</text>
+            <text x="232" y="88" font-family="system-ui,sans-serif" font-size="7" fill="#a8c8e8">聯發科 -0.5% ▼</text>
+            <rect x="218" y="100" width="90" height="26" fill="#182533" rx="6"/>
+            <text x="228" y="114" font-family="system-ui,sans-serif" font-size="7.5" fill="white">⚡ 到價提醒</text>
+            <text x="228" y="124" font-family="system-ui,sans-serif" font-size="7" fill="#4a7bc8">2330 觸及 1050</text>
+            <rect x="222" y="136" width="140" height="46" fill="#2b5278" rx="6"/>
+            <text x="232" y="150" font-family="system-ui,sans-serif" font-size="7.5" fill="white">📈 週績效摘要</text>
+            <text x="232" y="162" font-family="system-ui,sans-serif" font-size="7" fill="#a8c8e8">總損益 +$12,480</text>
+            <text x="232" y="172" font-family="system-ui,sans-serif" font-size="7" fill="#a8c8e8">最佳: 台積電 +3.2%</text>
+            <text x="232" y="182" font-family="system-ui,sans-serif" font-size="7" fill="#a8c8e8">持倉 5 檔</text>
+            <!-- Input bar -->
+            <rect x="215" y="196" width="178" height="22" fill="#232e3c" rx="11"/>
+            <text x="228" y="211" font-family="system-ui,sans-serif" font-size="8" fill="#4a6b82">查詢持股...</text>
+          </svg>
+        </div>
+        <div class="apc-card-body">
+          <div class="apc-card-header">
+            <span class="apc-icon">📈</span>
+            <div class="apc-category" data-zh="日常工具" data-en="Daily Tool">日常工具</div>
+          </div>
+          <h3 class="apc-title" data-zh="AI 股價通知 Bot" data-en="AI Stock Alert Bot">AI 股價通知 Bot</h3>
+          <p class="apc-desc" data-zh="透過 Claude Code 實作 Telegram Bot，自動推送每日損益報告與到價提醒，加入 Cache 機制。從「我去找資訊」變成「資訊主動找我」。" data-en="Built a Telegram bot via Claude Code that auto-sends daily P&L reports and price alerts, with caching to minimize API calls. Shifted from 'I go find info' to 'info comes to me.'">透過 Claude Code 實作 Telegram Bot，自動推送每日損益報告與到價提醒，加入 Cache 機制。從「我去找資訊」變成「資訊主動找我」。</p>
+          <div class="apc-tags">
+            <span class="apc-tag">Claude Code</span>
+            <span class="apc-tag">Telegram Bot</span>
+            <span class="apc-tag" data-zh="自動排程" data-en="Auto-scheduling">自動排程</span>
+            <span class="apc-tag">Cache</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="ai-project-card" data-project="calendar" onclick="openDetail('calendar')" role="button" tabindex="0">
+        <div class="apc-screenshot">
+          <svg class="ai-cover-svg" viewBox="0 0 400 225" xmlns="http://www.w3.org/2000/svg">
+            <rect width="400" height="225" fill="#ede7dc"/>
+            <!-- Left: calendar panel -->
+            <rect x="0" y="0" width="210" height="225" fill="#fdfaf6"/>
+            <rect x="0" y="0" width="210" height="38" fill="#2c2416"/>
+            <text x="14" y="23" font-family="system-ui,sans-serif" font-size="10" fill="white" font-weight="600">Google Calendar</text>
+            <text x="14" y="33" font-family="system-ui,sans-serif" font-size="7.5" fill="#b09b7c">2026年 5月</text>
+            <!-- Day labels -->
+            <text x="18" y="52" font-family="system-ui,sans-serif" font-size="7" fill="#b09b7c">日</text>
+            <text x="42" y="52" font-family="system-ui,sans-serif" font-size="7" fill="#b09b7c">一</text>
+            <text x="66" y="52" font-family="system-ui,sans-serif" font-size="7" fill="#b09b7c">二</text>
+            <text x="90" y="52" font-family="system-ui,sans-serif" font-size="7" fill="#b09b7c">三</text>
+            <text x="114" y="52" font-family="system-ui,sans-serif" font-size="7" fill="#b09b7c">四</text>
+            <text x="138" y="52" font-family="system-ui,sans-serif" font-size="7" fill="#b09b7c">五</text>
+            <text x="162" y="52" font-family="system-ui,sans-serif" font-size="7" fill="#b09b7c">六</text>
+            <!-- Calendar rows -->
+            <!-- Row 1: 1-3 -->
+            <text x="18" y="72" font-family="system-ui,sans-serif" font-size="9" fill="#c0ad99">27</text>
+            <text x="42" y="72" font-family="system-ui,sans-serif" font-size="9" fill="#c0ad99">28</text>
+            <text x="66" y="72" font-family="system-ui,sans-serif" font-size="9" fill="#c0ad99">29</text>
+            <text x="90" y="72" font-family="system-ui,sans-serif" font-size="9" fill="#2c2416">1</text>
+            <text x="114" y="72" font-family="system-ui,sans-serif" font-size="9" fill="#2c2416">2</text>
+            <text x="138" y="72" font-family="system-ui,sans-serif" font-size="9" fill="#2c2416">3</text>
+            <text x="162" y="72" font-family="system-ui,sans-serif" font-size="9" fill="#2c2416">4</text>
+            <!-- Row 2: 5-11 -->
+            <text x="18" y="96" font-family="system-ui,sans-serif" font-size="9" fill="#2c2416">5</text>
+            <text x="42" y="96" font-family="system-ui,sans-serif" font-size="9" fill="#2c2416">6</text>
+            <text x="66" y="96" font-family="system-ui,sans-serif" font-size="9" fill="#2c2416">7</text>
+            <text x="90" y="96" font-family="system-ui,sans-serif" font-size="9" fill="#2c2416">8</text>
+            <!-- Event bar: Sprint Review -->
+            <rect x="108" y="84" width="62" height="14" fill="#7c5cbf" rx="2" opacity="0.85"/>
+            <text x="111" y="94" font-family="system-ui,sans-serif" font-size="6.5" fill="white">Sprint Review</text>
+            <text x="162" y="96" font-family="system-ui,sans-serif" font-size="9" fill="#2c2416">11</text>
+            <!-- Row 3: 12-18 -->
+            <!-- Today highlight -->
+            <circle cx="20" cy="117" r="9" fill="#2c2416"/>
+            <text x="16" y="121" font-family="system-ui,sans-serif" font-size="9" fill="white">12</text>
+            <text x="42" y="121" font-family="system-ui,sans-serif" font-size="9" fill="#2c2416">13</text>
+            <!-- Event bar -->
+            <rect x="60" y="110" width="44" height="14" fill="#c45e2e" rx="2" opacity="0.85"/>
+            <text x="63" y="120" font-family="system-ui,sans-serif" font-size="6.5" fill="white">午餐約會</text>
+            <text x="114" y="121" font-family="system-ui,sans-serif" font-size="9" fill="#2c2416">15</text>
+            <text x="138" y="121" font-family="system-ui,sans-serif" font-size="9" fill="#2c2416">16</text>
+            <text x="162" y="121" font-family="system-ui,sans-serif" font-size="9" fill="#2c2416">17</text>
+            <!-- Row 4: 19-25 -->
+            <rect x="12" y="135" width="44" height="14" fill="#3d6e4e" rx="2" opacity="0.8"/>
+            <text x="15" y="145" font-family="system-ui,sans-serif" font-size="6.5" fill="white">週會 10:00</text>
+            <text x="66" y="146" font-family="system-ui,sans-serif" font-size="9" fill="#2c2416">21</text>
+            <text x="90" y="146" font-family="system-ui,sans-serif" font-size="9" fill="#2c2416">22</text>
+            <text x="114" y="146" font-family="system-ui,sans-serif" font-size="9" fill="#2c2416">23</text>
+            <text x="138" y="146" font-family="system-ui,sans-serif" font-size="9" fill="#2c2416">24</text>
+            <text x="162" y="146" font-family="system-ui,sans-serif" font-size="9" fill="#2c2416">25</text>
+            <!-- Row 5 -->
+            <text x="18" y="171" font-family="system-ui,sans-serif" font-size="9" fill="#2c2416">26</text>
+            <rect x="36" y="160" width="56" height="14" fill="#7c5cbf" rx="2" opacity="0.7"/>
+            <text x="39" y="170" font-family="system-ui,sans-serif" font-size="6.5" fill="white">1:1 Meeting</text>
+            <text x="114" y="171" font-family="system-ui,sans-serif" font-size="9" fill="#2c2416">29</text>
+            <text x="138" y="171" font-family="system-ui,sans-serif" font-size="9" fill="#2c2416">30</text>
+            <text x="162" y="171" font-family="system-ui,sans-serif" font-size="9" fill="#2c2416">31</text>
+            <!-- Right: Discord dark panel -->
+            <rect x="210" y="0" width="190" height="225" fill="#313338"/>
+            <rect x="210" y="0" width="190" height="40" fill="#2b2d31"/>
+            <text x="230" y="16" font-family="system-ui,sans-serif" font-size="8" fill="#72767d"># ai-calendar</text>
+            <circle cx="388" cy="12" r="4" fill="#3d6e4e"/>
+            <!-- Discord messages -->
+            <circle cx="224" cy="60" r="9" fill="#5865f2" opacity="0.9"/>
+            <text x="220" y="64" font-family="system-ui,sans-serif" font-size="8" fill="white">Y</text>
+            <text x="238" y="56" font-family="system-ui,sans-serif" font-size="8" fill="#dbdee1" font-weight="600">Yvonne</text>
+            <rect x="238" y="60" width="152" height="28" fill="#2b2d31" rx="4"/>
+            <text x="246" y="73" font-family="system-ui,sans-serif" font-size="7.5" fill="#dbdee1">下週五下午三點排個</text>
+            <text x="246" y="83" font-family="system-ui,sans-serif" font-size="7.5" fill="#dbdee1">45分鐘 sprint review</text>
+            <!-- Bot response -->
+            <circle cx="224" cy="106" r="9" fill="#3d6e4e" opacity="0.9"/>
+            <text x="221" y="110" font-family="system-ui,sans-serif" font-size="7" fill="white">AI</text>
+            <text x="238" y="102" font-family="system-ui,sans-serif" font-size="8" fill="#3d6e4e" font-weight="600">CalendarBot</text>
+            <rect x="238" y="106" width="156" height="54" fill="#2b2d31" rx="4"/>
+            <text x="246" y="118" font-family="system-ui,sans-serif" font-size="7" fill="#dbdee1">✅ 已建立行程</text>
+            <text x="246" y="129" font-family="system-ui,sans-serif" font-size="7" fill="#b5bac1">Sprint Review</text>
+            <text x="246" y="139" font-family="system-ui,sans-serif" font-size="7" fill="#b5bac1">5/16 (五) 15:00–15:45</text>
+            <text x="246" y="149" font-family="system-ui,sans-serif" font-size="7" fill="#b5bac1">🎨 工作 · 紫色</text>
+            <text x="246" y="159" font-family="system-ui,sans-serif" font-size="7" fill="#72767d">已邀請 3 位成員</text>
+            <!-- Input bar -->
+            <rect x="215" y="196" width="178" height="22" fill="#383a40" rx="4"/>
+            <text x="226" y="211" font-family="system-ui,sans-serif" font-size="8" fill="#72767d">輸入行程...</text>
+          </svg>
+        </div>
+        <div class="apc-card-body">
+          <div class="apc-card-header">
+            <span class="apc-icon">🗓️</span>
+            <div class="apc-category" data-zh="日常工具" data-en="Daily Tool">日常工具</div>
+          </div>
+          <h3 class="apc-title" data-zh="Discord × Google Calendar" data-en="Discord × Google Calendar">Discord × Google Calendar</h3>
+          <p class="apc-desc" data-zh="在 Discord 輸入一句話，AI 分析語意後串接 Google Calendar，依類型自動分色。用一句話取代繁瑣的表單填寫。" data-en="Type one sentence in Discord, AI parses intent and adds it to Google Calendar, auto-color-coded by type. One sentence replaces tedious form filling.">在 Discord 輸入一句話，AI 分析語意後串接 Google Calendar，依類型自動分色。用一句話取代繁瑣的表單填寫。</p>
+          <div class="apc-tags">
+            <span class="apc-tag">Discord Bot</span>
+            <span class="apc-tag">OpenAI API</span>
+            <span class="apc-tag">Google Calendar</span>
+            <span class="apc-tag" data-zh="自然語言" data-en="NLP">自然語言</span>
+          </div>
+        </div>
+      </div>
+    </div><!-- /.ai-cards-row -->
+    <div class="ai-detail-below" id="ai-detail-below">
+      <div id="ai-detail-content"></div>
+    </div>
+    <div class="ai-lightbox" id="ai-lightbox" onclick="closeLightbox()">
+      <img class="ai-lightbox-img" id="ai-lightbox-img" src="" alt="" onclick="event.stopPropagation()">
+      <button class="ai-lightbox-close" onclick="closeLightbox()">✕</button>
+    </div>
+  </div>
+</div>
+
+<div class="wrapper-divider"><div class="divider-line"></div></div>
+
+<!-- ABOUT -->
+<div class="wrapper">
+  <div class="section-gap" id="about">
+    <div class="section-head">
+      <span class="section-title-text" data-zh="關於我" data-en="About Me">關於我</span>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="about-layout">
+      <div class="about-card">
+        <div class="about-name" data-zh="AI Software PM" data-en="AI Software PM">AI Software PM</div>
+        <div class="about-skills">
+          <div class="skill-row"><div class="skill-dot"></div><span class="skill-name" data-zh="產品策略與需求定義" data-en="Product Strategy & Requirements">產品策略與需求定義</span></div>
+          <div class="skill-row"><div class="skill-dot"></div><span class="skill-name" data-zh="數據分析 / GA4 埋點" data-en="Data Analytics / GA4">數據分析 / GA4 埋點</span></div>
+          <div class="skill-row"><div class="skill-dot"></div><span class="skill-name">Prompt Engineering</span></div>
+          <div class="skill-row"><div class="skill-dot"></div><span class="skill-name">Claude API / OpenAI API</span></div>
+          <div class="skill-row"><div class="skill-dot"></div><span class="skill-name" data-zh="Figma / FigJam / Notion" data-en="Figma / FigJam / Notion">Figma / FigJam / Notion</span></div>
+          <div class="skill-row"><div class="skill-dot"></div><span class="skill-name" data-zh="Replit 快速原型" data-en="Rapid Prototyping (Replit)">Replit 快速原型</span></div>
+        </div>
+        <div style="margin-top: 28px; padding-top: 24px; border-top: 1px solid var(--border); display: flex; flex-direction: column; gap: 10px;">
+          <a href="mailto:wxinn77@gmail.com" style="font-size: 13px; color: var(--brown-mid); text-decoration: none; display: flex; align-items: center; gap: 10px; font-weight: 500; transition: color 0.2s;" onmouseover="this.style.color='var(--warm-dark)'" onmouseout="this.style.color='var(--brown-mid)'">
+            <span style="font-size: 15px;">✉</span> wxinn77@gmail.com
+          </a>
+          <a href="https://www.linkedin.com/in/xinhuiwu/" target="_blank" rel="noopener" style="font-size: 13px; color: var(--brown-mid); text-decoration: none; display: flex; align-items: center; gap: 10px; font-weight: 500; transition: color 0.2s;" onmouseover="this.style.color='var(--warm-dark)'" onmouseout="this.style.color='var(--brown-mid)'">
+            <span style="font-size: 15px; font-weight: 700;">in</span> linkedin.com/in/xinhuiwu
+          </a>
+        </div>
+      </div>
+
+      <div class="about-content">
+        <blockquote class="about-quote" data-zh="AI 是一種新的執行能力，把時間更有效運用在決策上。" data-en="AI is a new execution capability — use your time more effectively on decisions that matter.">AI 是一種新的執行能力，把時間更有效運用在決策上。</blockquote>
+
+        <div class="about-section-label">專業背景與核心能力</div>
+        <p class="about-para">近三年軟體產品經理實戰經驗，專注於 Android 與 PWA 跨平台產品開發，擅長將商業目標轉化為清晰的技術規格，具備從 0 到 1 完整主導產品功能開發的豐富經歷。深度參與前端與後台開發流程，熟悉 RESTful API 架構，習慣在開發前期透過 Figma 製作高保真原型，有效降低溝通風險。具備流利的英文讀寫與口語溝通能力，能夠支援國際化產品推廣與多國團隊協作需求。</p>
+
+        <div class="about-section-label">AI 技術應用與創新導入</div>
+        <p class="about-para">具備將 AI 導入實際產品的實戰經驗。曾主導 AI TTS 功能的產品化，從無到有定義產品邏輯與用戶旅程，將語音合成技術應用於日文配音轉中文配音，成功落地實現，深切體驗了 AI 功能導入對產品體驗的巨大潛力。持續研究 LLM、Prompt Engineering、自動化推薦系統等技術趨勢，積極探索如何將這些技術應用於提升平台效能與用戶滿意度。</p>
+
+        <div class="about-section-label">數據分析與產品優化</div>
+        <p class="about-para">透過追蹤產品核心指標並分析用戶行為，持續優化內容分發與推薦邏輯，最終達成：人均看片數量顯著提升，平均單次使用時長從 10 分鐘翻倍成長至 20 分鐘，深度參與度提升 100%。習慣從使用行為分析出發，定義優化策略，並在上線後透過數據回饋持續迭代，確保每一個功能改動都能為業務成長帶來實質貢獻。</p>
+
+        <div class="about-section-label">電商、CRM 與會員系統</div>
+        <p class="about-para">從行銷企劃到 PM，與客戶對接、透過用戶行為與數據判斷活動成效一直是工作核心。在 PM 任內多次主導會員系統迭代，透過切分不同類型用戶、推送差異化優惠方案，每個方案皆依據對應用戶的預期操作行為設計，在每次迭代中持續貼近用戶並鞏固商業模式。</p>
+
+        <div class="about-section-label">跨部門協作與專案管理</div>
+        <p class="about-para">習慣扮演工程、設計與業務之間的橋樑，工作方式涵蓋需求訪談、規格定義、時程控管到風險管理的完整流程。在開發前期深入理解各方利害關係人的真實需求，主動識別潛在阻礙，提前協調資源確保如期上線。熟悉敏捷開發流程，習慣使用 Notion、Google Sheets 等工具進行專案追蹤，確保跨部門資訊透明、協作順暢。</p>
+
+        <div class="about-section-label">持續學習與產品熱忱</div>
+        <p class="about-para">生活中習慣留意各種產品的運作模式，時常拆解 App 的介面細節（UI/UX）與交互邏輯，思考設計背後的優缺點。對新技術抱持高度熱忱，尤其對 AI 技術在產品場景中的應用充滿期待，面對挑戰習慣主動尋求突破，樂於在快速變化的環境中學習成長。</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<footer>
+  <span data-zh="© 2026 · AI Product Manager Portfolio" data-en="© 2026 · AI Product Manager Portfolio">© 2026 · AI Product Manager Portfolio</span>
+  <span data-zh="以 Claude Code 協助製作" data-en="Built with Claude Code">以 Claude Code 協助製作</span>
+</footer>
+
+<script>
+  let currentLang = 'zh';
+
+  function setLang(lang) {
+    currentLang = lang;
+    document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+    document.querySelector(`.lang-btn[onclick="setLang('${lang}')"]`).classList.add('active');
+    document.querySelectorAll('[data-zh]').forEach(el => {
+      const text = el.getAttribute(`data-${lang}`);
+      if (text) el.innerHTML = text;
+    });
+    document.documentElement.lang = lang === 'zh' ? 'zh-TW' : 'en';
+  }
+
+  // Panel navigation
+  let currentPanel = 0;
+  const TOTAL_PANELS = 3;
+  let metricsAnimated = false;
+
+  function changePanel(dir) { goPanel(currentPanel + dir); }
+
+  function goPanel(index) {
+    if (index < 0 || index >= TOTAL_PANELS) return;
+    document.querySelectorAll('.cs-panel').forEach((p, i) => p.classList.toggle('active', i === index));
+    document.querySelectorAll('.cs-step').forEach((s, i) => s.classList.toggle('active', i === index));
+    const prev = document.getElementById('cs-prev'); if (prev) prev.disabled = index === 0;
+    const next = document.getElementById('cs-next'); if (next) next.disabled = index === TOTAL_PANELS - 1;
+    currentPanel = index;
+    if (index === 2 && !metricsAnimated) { animateMetrics(); metricsAnimated = true; }
+  }
+
+  function animateMetrics() {
+    document.querySelectorAll('.cs-result-number').forEach(el => {
+      const target = parseFloat(el.dataset.target);
+      const suffix = el.dataset.suffix || '';
+      const useComma = el.dataset.comma === 'true';
+      const triangle = el.dataset.triangle;
+      let prefix = '';
+      if (triangle === 'up') prefix = '<span style="color:#e03030;font-size:0.6em;vertical-align:middle;margin-right:2px">▲</span>';
+      else if (triangle === 'down') prefix = '<span style="color:#3d6e4e;font-size:0.6em;vertical-align:middle;margin-right:2px">▼</span>';
+      const duration = 1800;
+      const start = performance.now();
+      function tick(now) {
+        const p = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - p, 3);
+        const val = Math.floor(target * eased);
+        el.innerHTML = prefix + (useComma ? val.toLocaleString('en-US') : val) + suffix;
+        if (p < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    });
+  }
+
+  // Modal system
+  const projectData = {
+    community: {
+      screenshots: ['翠柏社區_設計稿/01_首頁_Dashboard.jpg','翠柏社區_設計稿/04_抄表填寫_MeterPage.jpg','翠柏社區_設計稿/10_停車管理_ParkingPage.jpg','翠柏社區_設計稿/11_包裹查詢_PackagePage.jpg'],
+      tag: 'AI 社群平台',
+      title: '租屋社群 App — 大樓鄰里連結平台',
+      sections: [
+        { heading: '背景與問題定義', type: 'text', body: ['租屋族普遍缺乏鄰里歸屬感，大樓公告、包裹通知、設施預約仍依賴紙本或 Line 群。物業管理效率低落，居民體驗碎片化。'] },
+        { heading: '用戶研究', type: 'list', items: ['訪談 12 位租屋族，發現 83% 不認識同樓層鄰居', '物業人員平均每天處理 40+ 通重複性電話', '包裹遺失投訴佔客服量 31%'] },
+        { heading: 'AI 解決方案設計', type: 'list', items: ['GPT-4 驅動的公告摘要 — 自動將長篇公告濃縮為三行重點', '智慧包裹通知 — 結合電梯監控 + 視覺辨識自動推播', '鄰里媒合推薦 — 依興趣標籤建議互助配對'] },
+        { heading: '執行與成果', type: 'list', items: ['MVP 上線 6 週，DAU 達 340 人', '物業客服電話量下降 44%', '用戶 NPS 從 12 提升至 51'] },
+        { heading: '使用工具', type: 'pills', items: ['Figma', 'GPT-4 API', 'Firebase', 'Miro', 'UserTesting'] }
+      ]
+    },
+    ga: {
+      screenshots: ['GA報表-1.png','GA報表-2.png','GA報表-3.png','GA報表-4.png'],
+      tag: 'AI 數據分析',
+      title: 'GA 自動報表 — 每日 Telegram 推播系統',
+      sections: [
+        { heading: '背景與問題定義', type: 'text', body: ['行銷團隊每週花費 6+ 小時手動匯出 GA4 數據、製作報表、貼到群組。數據延遲 24-48 小時，決策慢半拍。'] },
+        { heading: '需求訪談', type: 'list', items: ['與 5 位行銷主管深度訪談，梳理 12 個核心指標', '確認推播時機：每日 09:00 前送達，週報週一早晨', '需求：異常自動警示（流量暴跌 / 轉換率異常）'] },
+        { heading: 'AI 自動化設計', type: 'list', items: ['Python + GA4 Data API 每日自動拉取數據', 'GPT-4 生成自然語言摘要，解讀趨勢而非只列數字', 'Telegram Bot 推播格式化報表，支援圖表截圖附件', '異常偵測：Z-score 演算法觸發即時警報'] },
+        { heading: '執行與成果', type: 'list', items: ['每週省下 6 小時人工作業', '報表延遲從 48 小時降至 0（即時）', '行銷決策速度提升，A/B 測試迭代週期縮短 40%'] },
+        { heading: '使用工具', type: 'pills', items: ['Python', 'GA4 API', 'GPT-4 API', 'Telegram Bot API', 'Google Sheets', 'Cron'] }
+      ]
+    },
+    stock: {
+      screenshots: ['stock-bot-1.png','stock-bot-2.png','stock-bot-3.png','stock-bot-4.png'],
+      tag: 'AI 投資助理',
+      title: '股票分析 Bot — Telegram 智慧選股助手',
+      sections: [
+        { heading: '背景與問題定義', type: 'text', body: ['散戶投資人面對海量財報、新聞、技術指標，難以快速篩選標的。現有工具要嘛太複雜，要嘛資訊太落後。'] },
+        { heading: '用戶痛點研究', type: 'list', items: ['調查 50 位散戶，68% 表示每天花超過 1 小時看財經資訊', '主要痛點：不知道哪些訊號重要、怕錯過進場時機', '期望：用自然語言問股票，像問朋友一樣'] },
+        { heading: 'AI 功能設計', type: 'list', items: ['自然語言查詢 — 「最近科技股有什麼動向？」', '技術分析摘要 — RSI、MACD、布林通道自動解讀', '個股評分系統 — 財務健康度 + 籌碼面 + 技術面綜合評分', '自選股追蹤 — 突破關鍵價位即時推播'] },
+        { heading: '執行與成果', type: 'list', items: ['Beta 用戶 200 人，30 日留存率 61%', '平均每日查詢 4.2 次/人', '用戶回報「節省 50 分鐘/天」的看盤時間'] },
+        { heading: '使用工具', type: 'pills', items: ['Python', 'GPT-4 API', 'Yahoo Finance API', 'Telegram Bot', 'Redis', 'PostgreSQL'] }
+      ]
+    },
+    calendar: {
+      screenshots: ['calendar-agent-1.png','calendar-agent-2.png','calendar-agent-3.png','calendar-agent-4.png'],
+      tag: 'AI 行程助理',
+      title: '智慧行事曆 Bot — Discord 會議排程助手',
+      sections: [
+        { heading: '背景與問題定義', type: 'text', body: ['遠端團隊跨時區協作，會議排程耗時且易出錯。來回確認時間平均佔用 23 分鐘/次，還常發生雙重預約。'] },
+        { heading: '需求分析', type: 'list', items: ['觀察 3 個遠端團隊的排程流程，記錄 40+ 次會議協調過程', '痛點排序：跨時區混亂 > 行事曆碎片化 > 重複確認信', '關鍵需求：一句話完成排程，自動考量所有人的空閒時段'] },
+        { heading: 'AI 功能設計', type: 'list', items: ['自然語言排程 — 「下週找三個人開 45 分鐘的 sprint review」', 'Google Calendar 整合 — 自動讀取所有人空閒時段', '時區智慧換算 — 顯示每人本地時間', 'Discord 互動確認 — Slash command + 按鈕式快速回覆'] },
+        { heading: '執行與成果', type: 'list', items: ['排程時間從平均 23 分鐘降至 2 分鐘', '雙重預約事故歸零', '團隊採用率 87%，取代原有的 Doodle 流程'] },
+        { heading: '使用工具', type: 'pills', items: ['Python', 'GPT-4 API', 'Google Calendar API', 'Discord Bot', 'OAuth 2.0'] }
+      ]
+    }
+  };
+
+  function buildDetailHTML(data) {
+    let html = `<div class="ai-detail-inner"><div class="ai-detail-top">
+      <div><div class="modal-tag">${data.tag}</div><h2 class="modal-title" style="margin-bottom:0">${data.title}</h2></div>
+      <button class="ai-detail-close" onclick="closeDetail()">✕</button>
+    </div>`;
+    if (data.screenshots && data.screenshots.length) {
+      html += `<div class="ai-detail-screenshots">`;
+      data.screenshots.forEach(src => { html += `<img src="${src}" alt="截圖" onclick="openLightbox('${src}')" title="點擊放大">`; });
+      html += `</div>`;
+    }
+    html += `<div class="ai-detail-sections">`;
+    data.sections.forEach(sec => {
+      html += `<div class="modal-section"><div class="modal-section-title">${sec.heading}</div>`;
+      if (sec.type === 'text') { sec.body.forEach(p => { html += `<p>${p}</p>`; }); }
+      else if (sec.type === 'list') { html += `<ul class="modal-list">`; sec.items.forEach(i => { html += `<li>${i}</li>`; }); html += `</ul>`; }
+      else if (sec.type === 'pills') { html += `<div class="modal-pills">`; sec.items.forEach(i => { html += `<span class="modal-pill">${i}</span>`; }); html += `</div>`; }
+      html += `</div>`;
+    });
+    html += `</div></div>`;
+    return html;
+  }
+
+  function openDetail(key) {
+    const data = projectData[key];
+    if (!data) return;
+    const row = document.getElementById('ai-cards-row');
+    const below = document.getElementById('ai-detail-below');
+    if (row.dataset.open === key) { closeDetail(); return; }
+    document.getElementById('ai-detail-content').innerHTML = buildDetailHTML(data);
+    row.dataset.open = key;
+    row.classList.add('detail-open');
+    document.querySelectorAll('.ai-project-card').forEach(c => c.classList.toggle('selected', c.dataset.project === key));
+    below.style.height = '0';
+    requestAnimationFrame(() => { requestAnimationFrame(() => {
+      below.style.height = document.getElementById('ai-detail-content').scrollHeight + 'px';
+    }); });
+    below.addEventListener('transitionend', () => { if (row.dataset.open) below.style.height = 'auto'; }, { once: true });
+    setTimeout(() => { below.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }, 100);
+  }
+
+  function closeDetail() {
+    const row = document.getElementById('ai-cards-row');
+    const below = document.getElementById('ai-detail-below');
+    below.style.height = below.scrollHeight + 'px';
+    requestAnimationFrame(() => { requestAnimationFrame(() => { below.style.height = '0'; }); });
+    row.classList.remove('detail-open');
+    delete row.dataset.open;
+    document.querySelectorAll('.ai-project-card').forEach(c => c.classList.remove('selected'));
+  }
+
+  function openLightbox(src) {
+    const lb = document.getElementById('ai-lightbox');
+    document.getElementById('ai-lightbox-img').src = src;
+    lb.classList.add('active');
+  }
+
+  function closeLightbox() {
+    document.getElementById('ai-lightbox').classList.remove('active');
+  }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      if (document.getElementById('ai-lightbox').classList.contains('active')) closeLightbox();
+      else closeDetail();
+    }
+  });
+</script>
+</body>
+</html>
