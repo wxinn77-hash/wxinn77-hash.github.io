@@ -215,30 +215,6 @@
 
   .stat-row:last-child { border-bottom: none; padding-bottom: 0; }
 
-  .stat-tabs {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 20px;
-    flex-wrap: wrap;
-  }
-  .stat-tab {
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--brown-light);
-    cursor: pointer;
-    padding-bottom: 2px;
-    border-bottom: 1px solid transparent;
-    transition: color 0.2s, border-color 0.2s;
-    white-space: nowrap;
-  }
-  .stat-tab.active { color: var(--warm-dark); border-bottom-color: var(--warm-dark); }
-  .stat-tab:hover { color: var(--warm-dark); }
-  .stat-tab-sep { color: var(--border); font-size: 12px; }
-  .stat-content { display: none; }
-  .stat-content.active { display: block; }
 
   .stat-label {
     font-size: 13px;
@@ -1001,36 +977,20 @@
     </div>
     <div class="hero-right">
       <div class="stat-card">
-        <div class="stat-tabs">
-          <span class="stat-tab active" onclick="switchStatTab(0)" data-zh="個人亮點" data-en="Highlights">個人亮點</span>
-          <span class="stat-tab-sep">|</span>
-          <span class="stat-tab" onclick="switchStatTab(1)" data-zh="帶領影音 App 開發 · 近 1 年" data-en="Video App Dev · Past Year">帶領影音 App 開發 · 近 1 年</span>
+        <div class="stat-eyebrow">
+          <span data-zh="個人亮點" data-en="Highlights">個人亮點</span>
+          <span style="color:var(--brown-light);margin:0 6px;">·</span>
+          <span style="font-weight:400;letter-spacing:0.02em;" data-zh="帶領影音 App 開發近一年成長" data-en="Video App · Past Year">帶領影音 App 開發近一年成長</span>
         </div>
-
-        <div class="stat-content active" id="stat-content-0">
-          <div class="stat-row">
-            <span class="stat-label" data-zh="尊貴會員年成長" data-en="Premium Member Growth">尊貴會員年成長</span>
-            <span class="stat-sep">|</span>
-            <span class="stat-value"><span style="color:#e03030;font-size:0.6em;vertical-align:middle;margin-right:2px">▲</span>30%</span>
-          </div>
-          <div class="stat-row">
-            <span class="stat-label" data-zh="平均看片率提升" data-en="Avg. Watch Rate Growth">平均看片率提升</span>
-            <span class="stat-sep">|</span>
-            <span class="stat-value"><span style="color:#e03030;font-size:0.6em;vertical-align:middle;margin-right:2px">▲</span>66%</span>
-          </div>
+        <div class="stat-row">
+          <span class="stat-label" data-zh="尊貴會員年成長" data-en="Premium Member Growth">尊貴會員年成長</span>
+          <span class="stat-sep">|</span>
+          <span class="stat-value"><span style="color:#e03030;font-size:0.6em;vertical-align:middle;margin-right:2px">▲</span>30%</span>
         </div>
-
-        <div class="stat-content" id="stat-content-1">
-          <div class="stat-row">
-            <span class="stat-label" data-zh="搜尋頁 PV 成長" data-en="Search Page PV Growth">搜尋頁 PV 成長</span>
-            <span class="stat-sep">|</span>
-            <span class="stat-value"><span style="color:#e03030;font-size:0.6em;vertical-align:middle;margin-right:2px">▲</span>74%</span>
-          </div>
-          <div class="stat-row">
-            <span class="stat-label" data-zh="搜尋無結果率降低" data-en="Zero-Result Rate Drop">搜尋無結果率降低</span>
-            <span class="stat-sep">|</span>
-            <span class="stat-value"><span style="color:#3d6e4e;font-size:0.6em;vertical-align:middle;margin-right:2px">▼</span>43%</span>
-          </div>
+        <div class="stat-row">
+          <span class="stat-label" data-zh="平均看片率提升" data-en="Avg. Watch Rate Growth">平均看片率提升</span>
+          <span class="stat-sep">|</span>
+          <span class="stat-value"><span style="color:#e03030;font-size:0.6em;vertical-align:middle;margin-right:2px">▲</span>66%</span>
         </div>
       </div>
     </div>
@@ -1625,11 +1585,6 @@
       }
       requestAnimationFrame(tick);
     });
-  }
-
-  function switchStatTab(idx) {
-    document.querySelectorAll('.stat-tab').forEach((t, i) => t.classList.toggle('active', i === idx));
-    document.querySelectorAll('.stat-content').forEach((c, i) => c.classList.toggle('active', i === idx));
   }
 
   // Modal system
