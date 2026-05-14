@@ -913,30 +913,93 @@
     background: var(--border);
   }
 
-  /* MOBILE */
+  /* MOBILE — iPhone 15 (390px) baseline */
   @media (max-width: 768px) {
+
+    /* Header */
     header { padding: 0 20px; }
     nav a { display: none; }
-    .hero { padding: 100px 20px 60px; }
-    .hero-top { grid-template-columns: 1fr; gap: 40px; }
+
+    /* Hero */
+    .hero { padding: 88px 20px 52px; }
+    .hero-top { grid-template-columns: 1fr; gap: 32px; }
+    .hero-eyebrow { font-size: 16px; margin-bottom: 16px; }
+    .hero-title { font-size: 36px; margin-bottom: 20px; }
+    .hero-desc { font-size: 14px; max-width: 100%; }
+    .hero-cta { margin-top: 28px; padding: 12px 24px; font-size: 12px; }
+
+    /* Stat card */
+    .stat-card { padding: 22px 20px; }
+    .stat-eyebrow { font-size: 9px; letter-spacing: 0.06em; margin-bottom: 14px; flex-wrap: wrap; gap: 4px; }
+    .stat-row { padding: 12px 0; }
+    .stat-label { font-size: 12px; }
+    .stat-sep { padding: 0 12px; }
+    .stat-value { font-size: 28px; }
+
+    /* Layout */
     .wrapper { padding: 0 20px; }
-    .section-gap { padding: 60px 0; }
-    .cs-header { padding: 24px; }
-    .cs-panel-nav { padding: 0 16px; }
+    .section-gap { padding: 56px 0; }
+    .section-head { margin-bottom: 36px; }
+    .section-title-text { font-size: 22px; }
+
+    /* Case Study */
+    .cs-wrapper { border-radius: 12px; }
+    .cs-header { padding: 24px 20px; }
+    .cs-header-title { font-size: 22px; line-height: 1.25; }
+    .cs-header-desc { font-size: 13px; }
+    .cs-kicker { font-size: 10px; }
+    .cs-panel-nav { padding: 0 16px; height: 48px; }
     .cs-steps { gap: 4px; }
-    .cs-step { padding: 3px 8px; font-size: 11px; }
-    .cs-process-panel { padding: 24px; }
-    .cs-ui-panel { padding: 24px; }
-    .cs-ui-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
-    .cs-results-panel { grid-template-columns: 1fr; padding: 24px; gap: 24px; }
-    .cs-result-number { font-size: 48px; }
-    .cs-roles { padding: 20px 24px; }
+    .cs-step { padding: 4px 10px; font-size: 11px; }
+    .cs-process-panel { padding: 20px; gap: 18px; }
+    .pl-desc { font-size: 12px; }
+    .cs-ui-panel { padding: 20px; }
+    .cs-ui-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .cs-results-panel { grid-template-columns: 1fr; padding: 24px 20px; gap: 20px; }
+    .cs-result-number { font-size: 44px; }
+    .cs-result-name { font-size: 12px; }
+    .cs-result-detail { font-size: 10px; }
+    .cs-roles { padding: 16px 20px; gap: 8px; }
+    .role-pill { font-size: 11px; padding: 4px 12px; }
+
+    /* AI Projects */
+    .ai-section-intro { font-size: 13px; margin-top: -16px; margin-bottom: 24px; }
     .ai-cards-row .ai-project-card { flex: 0 0 100%; }
-    .ai-cards-row.detail-open .ai-project-card { flex: 0 0 calc(50% - 4px); }
-    .about-layout { grid-template-columns: 1fr; }
-    .about-card { position: static; }
-    .contact-area { grid-template-columns: 1fr; padding: 40px; }
-    footer { flex-direction: column; gap: 8px; padding: 24px 20px; }
+    .ai-cards-row.detail-open { gap: 6px; }
+    .ai-cards-row.detail-open .ai-project-card { flex: 0 0 calc(50% - 3px); }
+    .ai-detail-inner { padding: 20px; border-radius: 8px; }
+    .ai-detail-top { margin-bottom: 16px; }
+    .ai-detail-screenshots {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+      margin-bottom: 20px;
+      padding-bottom: 20px;
+    }
+    .ai-detail-screenshots img { height: 90px; border-radius: 6px; cursor: default; }
+    .ai-detail-sections { grid-template-columns: 1fr; gap: 0; }
+    .ai-detail-close { width: 32px; height: 32px; font-size: 14px; }
+    .modal-title { font-size: 20px; margin-bottom: 20px; }
+    .modal-section { margin-bottom: 16px; padding-bottom: 16px; }
+    .modal-section p, .modal-list li { font-size: 13px; }
+
+    /* About */
+    .about-layout { grid-template-columns: 1fr; gap: 32px; }
+    .about-card { position: static; padding: 28px 24px; }
+    .about-name { font-size: 18px; margin-bottom: 20px; }
+    .about-quote { font-size: 18px; line-height: 1.5; padding-left: 16px; margin-bottom: 24px; }
+    .about-para { font-size: 13px; }
+    .about-section-label { margin-top: 20px; }
+
+    /* Contact */
+    .contact-area { grid-template-columns: 1fr; padding: 32px 24px; gap: 28px; border-radius: 16px; }
+    .contact-headline { font-size: 26px; }
+    .contact-sub { font-size: 13px; }
+    .contact-btn { padding: 12px 20px; font-size: 12px; }
+
+    /* Footer */
+    .footer-outer { margin-top: 20px; }
+    footer { flex-direction: column; gap: 8px; padding: 20px; text-align: center; }
     .wrapper-divider { padding: 0 20px; }
   }
 
