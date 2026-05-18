@@ -1693,9 +1693,8 @@
       title: '智慧行事曆 Bot — Discord 會議排程助手',
       sections: [
         { heading: '背景與問題定義', type: 'text', body: ['遠端團隊跨時區協作，會議排程耗時且易出錯。來回確認時間平均佔用 23 分鐘/次，還常發生雙重預約。'] },
-        { heading: '需求分析', type: 'list', items: ['觀察 3 個遠端團隊的排程流程，記錄 40+ 次會議協調過程', '痛點排序：跨時區混亂 > 行事曆碎片化 > 重複確認信', '關鍵需求：一句話完成排程，自動考量所有人的空閒時段'] },
+        { heading: '痛點分析', type: 'list', items: ['沒辦法每次都歸類好類別，顏色非常混亂', '每次都要填好幾個欄位，沒辦法一句話就完成註記', '需要可以在不同平台都提醒我事項'] },
         { heading: 'AI 功能設計', type: 'list', items: ['自然語言排程 — 「下週找三個人開 45 分鐘的 sprint review」', 'Google Calendar 整合 — 自動讀取所有人空閒時段', '時區智慧換算 — 顯示每人本地時間', 'Discord 互動確認 — Slash command + 按鈕式快速回覆'] },
-        { heading: '執行與成果', type: 'list', items: ['排程時間從平均 23 分鐘降至 2 分鐘', '雙重預約事故歸零', '團隊採用率 87%，取代原有的 Doodle 流程'] },
         { heading: '使用工具', type: 'pills', items: ['Python', 'GPT-4 API', 'Google Calendar API', 'Discord Bot', 'OAuth 2.0'] }
       ]
     }
