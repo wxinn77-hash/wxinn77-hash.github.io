@@ -376,10 +376,14 @@
   .cs-step-sep { display: none; }
 
   .cs-panel { display: none; }
-  .cs-panel.active { display: block; animation: csIn 0.25s ease; }
+  .cs-panel.active {
+    display: block;
+    animation: csIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+    will-change: opacity, transform;
+  }
 
   @keyframes csIn {
-    from { opacity: 0; transform: translateY(8px); }
+    from { opacity: 0; transform: translateY(4px); }
     to   { opacity: 1; transform: translateY(0); }
   }
 
@@ -965,9 +969,23 @@
     /* AI Projects */
     .ai-section-intro { font-size: 13px; margin-top: -16px; margin-bottom: 24px; }
     .ai-cards-row .ai-project-card { flex: 0 0 100%; }
-    .ai-cards-row.detail-open { gap: 6px; }
-    .ai-cards-row.detail-open .ai-project-card { flex: 0 0 calc(50% - 3px); }
-    .ai-detail-inner { padding: 20px; border-radius: 8px; }
+
+    /* Mobile: accordion — detail expands right below the selected card, no slide animation */
+    .ai-project-card { transition: none; }
+    .ai-cards-row.detail-open .ai-project-card { flex: 0 0 100%; opacity: 1; }
+    .ai-cards-row.detail-open .ai-project-card.selected { outline: 2px solid var(--accent); outline-offset: 2px; }
+    .ai-cards-row.detail-open .apc-card-body { padding: 24px; }
+    .ai-cards-row.detail-open .apc-desc,
+    .ai-cards-row.detail-open .apc-tags { max-height: 300px; opacity: 1; margin: 0 0 16px; }
+    .ai-cards-row.detail-open .apc-tags { margin-bottom: 0; }
+    .ai-cards-row.detail-open .apc-title { font-size: 19px; line-height: 1.3; margin-bottom: 10px; }
+    .ai-detail-below {
+      transition: none !important;
+      height: auto !important;
+      flex: 0 0 100%;
+      width: 100%;
+    }
+    .ai-detail-inner { margin-top: 0; padding: 20px; border-radius: 8px; }
     .ai-detail-top { margin-bottom: 16px; }
     .ai-detail-screenshots {
       display: grid;
@@ -1046,7 +1064,7 @@
           <span style="font-weight:400;letter-spacing:0.02em;" data-zh="帶領影音 App 開發近一年成長" data-en="Video App · Past Year">帶領影音 App 開發近一年成長</span>
         </div>
         <div class="stat-row">
-          <span class="stat-label" data-zh="尊貴會員年成長" data-en="Premium Member Growth">尊貴會員年成長</span>
+          <span class="stat-label" data-zh="VIP 會員年成長" data-en="VIP Member Growth">VIP 會員年成長</span>
           <span class="stat-sep">|</span>
           <span class="stat-value"><span style="color:#e03030;font-size:0.6em;vertical-align:middle;margin-right:2px">▲</span>30%</span>
         </div>
@@ -1682,7 +1700,7 @@
       sections: [
         { heading: '背景與問題定義', type: 'text', body: ['散戶投資人面對海量財報、新聞、技術指標，難以快速篩選標的。現有工具要嘛太複雜，要嘛資訊太落後。'] },
         { heading: '痛點分析', type: 'list', items: ['持倉與損益表可以一目瞭然', '針對無法看盤的人可以直接透過 stock-agent 對話觀看報表', '每日排程兩次發送提醒，台股／美股'] },
-        { heading: 'AI 功能設計', type: 'list', items: ['自然語言查詢 — 「最近科技股有什麼動向？」', '技術分析摘要 — RSI、MACD、布林通道自動解讀', '個股評分系統 — 財務健康度 + 籌碼面 + 技術面綜合評分', '自選股追蹤 — 突破關鍵價位即時推播'] },
+        { heading: 'AI 功能設計', type: 'list', items: ['技術分析摘要 — RSI、MACD、布林通道自動解讀', '個股評分系統 — 財務健康度 + 籌碼面 + 技術面綜合評分', '自選股追蹤 — 突破關鍵價位即時推播'] },
         { heading: '使用工具', type: 'pills', items: ['Python', 'GPT-4 API', 'Yahoo Finance API', 'Telegram Bot', 'Redis', 'PostgreSQL'] }
       ]
     },
@@ -1731,22 +1749,41 @@
     row.dataset.open = key;
     row.classList.add('detail-open');
     document.querySelectorAll('.ai-project-card').forEach(c => c.classList.toggle('selected', c.dataset.project === key));
-    below.style.height = '0';
-    requestAnimationFrame(() => { requestAnimationFrame(() => {
-      below.style.height = document.getElementById('ai-detail-content').scrollHeight + 'px';
-    }); });
-    below.addEventListener('transitionend', () => { if (row.dataset.open) below.style.height = 'auto'; }, { once: true });
-    setTimeout(() => { below.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }, 100);
+
+    const isMobile = window.innerWidth <= 768;
+    if (isMobile) {
+      // Accordion: move detail panel right after the selected card so it pushes the rest down
+      const selectedCard = document.querySelector(`.ai-project-card[data-project="${key}"]`);
+      if (selectedCard) row.insertBefore(below, selectedCard.nextSibling);
+      below.style.height = '';
+      setTimeout(() => { below.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }, 50);
+    } else {
+      // Desktop: ensure detail sits outside row (original position) and slide-down
+      if (below.parentNode === row) row.parentNode.insertBefore(below, row.nextSibling);
+      below.style.height = '0';
+      requestAnimationFrame(() => { requestAnimationFrame(() => {
+        below.style.height = document.getElementById('ai-detail-content').scrollHeight + 'px';
+      }); });
+      below.addEventListener('transitionend', () => { if (row.dataset.open) below.style.height = 'auto'; }, { once: true });
+      setTimeout(() => { below.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }, 100);
+    }
   }
 
   function closeDetail() {
     const row = document.getElementById('ai-cards-row');
     const below = document.getElementById('ai-detail-below');
-    below.style.height = below.scrollHeight + 'px';
-    requestAnimationFrame(() => { requestAnimationFrame(() => { below.style.height = '0'; }); });
+    const isMobile = window.innerWidth <= 768;
+    if (isMobile) {
+      below.style.height = '';
+    } else {
+      below.style.height = below.scrollHeight + 'px';
+      requestAnimationFrame(() => { requestAnimationFrame(() => { below.style.height = '0'; }); });
+    }
     row.classList.remove('detail-open');
     delete row.dataset.open;
     document.querySelectorAll('.ai-project-card').forEach(c => c.classList.remove('selected'));
+    // Move detail back to original position (after row) for next interaction
+    if (below.parentNode === row) row.parentNode.insertBefore(below, row.nextSibling);
   }
 
   function openLightbox(src) {
