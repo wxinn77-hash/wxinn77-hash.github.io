@@ -1698,21 +1698,25 @@
       tag: 'AI 投資助理',
       title: '股票分析 Bot — Telegram 智慧選股助手',
       sections: [
-        { heading: '背景與問題定義', type: 'text', body: ['散戶投資人面對海量財報、新聞、技術指標，難以快速篩選標的。現有工具要嘛太複雜，要嘛資訊太落後。'] },
-        { heading: '痛點分析', type: 'list', items: ['持倉與損益表可以一目瞭然', '針對無法看盤的人可以直接透過 stock-agent 對話觀看報表', '每日排程兩次發送提醒，台股／美股'] },
-        { heading: 'AI 功能設計', type: 'list', items: ['技術分析摘要 — RSI、MACD、布林通道自動解讀', '個股評分系統 — 財務健康度 + 籌碼面 + 技術面綜合評分', '自選股追蹤 — 突破關鍵價位即時推播'] },
-        { heading: '使用工具', type: 'pills', items: ['Python', 'GPT-4 API', 'Yahoo Finance API', 'Telegram Bot', 'Redis', 'PostgreSQL'] }
+        { heading: '背景與問題定義', type: 'text', body: ['身為散戶投資人，每天要在 Telegram 看訊息、查股價、看新聞、回頭翻自己的持倉，注意力非常碎。希望有個 bot 主動把該知道的資訊整理好餵給我，不用我去找資料。從 SQLite 本機跑 → Railway → Fly.io + Supabase + OpenAI，迭代到目前的最終架構。'] },
+        { heading: '核心功能', type: 'list', items: ['投資組合管理：/update、/sell、/get、/price 即時查詢，支援台股（上市 + 上櫃）與美股', '價格提醒：每 5 分鐘掃描，觸發突破／跌破推播', '排程推播：台股 14:00 收盤、美股 10:00 收盤、每日 22:00 AI 深度晚報'] },
+        { heading: 'AI 深度晚報（核心亮點）', type: 'list', items: ['每日 22:00 自動為每支持倉產出 HTML 網頁報告', '基本面：PE / EPS / 殖利率 / 52 週區間 / 分析師目標價', '月營收近 3 個月趨勢、YoY、累計成長率', '三大法人近 10 日買賣超（外資 / 投信 / 自營商）', 'K 線 + MA5/MA20/MA60 + RSI(14) + MACD', 'Google News 5 則 + GPT-4o-mini 五段綜合分析', 'Chart.js 互動圖表、Linear 風格 UI、技術名詞可折疊解說'] },
+        { heading: '架構與成本決策', type: 'list', items: ['Fly.io（$2.47/月）24/7 雲端運行，取代 Railway 試用方案', 'Supabase Postgres 取代 SQLite，避免容器重啟資料消失', 'Fly.io aiohttp 代理 Supabase Storage，繞過 CSP sandbox + Content-Type 限制', 'GPT-4o-mini 取代 GPT-4o，成本降 20 倍、品質差異 < 10%', '同一進程跑 polling + scheduler + HTTP server，零額外資源消耗', '總成本約 NT$80/月（Fly.io + OpenAI + Supabase Free tier）'] },
+        { heading: '爬蟲容錯處理', type: 'list', items: ['TWSE 三大法人請求間 sleep 0.8s 避免限流（>10 次/5 分鐘會被擋）', 'MOPS 月營收 HTML big5 編碼處理 + Origin/Referer headers 繞過安全頁', 'TPEx 上櫃用 .TWO suffix 自動分流；民國年轉西元', '單一股票全程失敗：log、跳過、其他股票照樣產出'] },
+        { heading: '使用工具', type: 'pills', items: ['Python', 'python-telegram-bot', 'APScheduler', 'aiohttp', 'yfinance', 'OpenAI GPT-4o-mini', 'Supabase', 'Chart.js', 'Fly.io', 'Docker'] }
       ]
     },
     calendar: {
       screenshots: ['calendar-agent-1.png','calendar-agent-2.png','calendar-agent-3.png','calendar-agent-4.png'],
       tag: 'AI 行程助理',
-      title: '智慧行事曆 Bot — Discord 會議排程助手',
+      title: '智慧行事曆 Bot — Discord × Google Calendar',
       sections: [
-        { heading: '背景與問題定義', type: 'text', body: ['遠端團隊跨時區協作，會議排程耗時且易出錯。來回確認時間平均佔用 23 分鐘/次，還常發生雙重預約。'] },
-        { heading: '痛點分析', type: 'list', items: ['沒辦法每次都歸類好類別，顏色非常混亂', '每次都要填好幾個欄位，沒辦法一句話就完成註記', '需要可以在不同平台都提醒我事項'] },
-        { heading: 'AI 功能設計', type: 'list', items: ['自然語言排程 — 「下週找三個人開 45 分鐘的 sprint review」', 'Google Calendar 整合 — 自動讀取所有人空閒時段', '時區智慧換算 — 顯示每人本地時間', 'Discord 互動確認 — Slash command + 按鈕式快速回覆'] },
-        { heading: '使用工具', type: 'pills', items: ['Python', 'GPT-4 API', 'Google Calendar API', 'Discord Bot', 'OAuth 2.0'] }
+        { heading: '背景與問題定義', type: 'text', body: ['日常事件記錄分散在 Discord 訊息與 Google Calendar 之間，每次新增事件都要在 Calendar 介面填好幾個欄位（標題、日期、時間、顏色），分類顏色也常常不一致。希望在最常用的 Discord 裡，用一句話就把事件丟到行事曆，AI 自動解析時間、判斷類型、上色。'] },
+        { heading: '痛點分析', type: 'list', items: ['手動建立行事曆事件要填多個欄位，沒辦法一句話完成', '事件分類顏色管理混亂，每次都要重選 color', '生活／工作／約會事項散落在 Discord 訊息，沒有集中追蹤的入口', '修改既有事件還要切換到 Calendar App，操作斷層'] },
+        { heading: 'AI 解決方案設計', type: 'list', items: ['/add_event：先點 4 類別按鈕（💼 工作 / 📝 考試 / 🌴 出遊 / ❤️ 約會），再用 Modal 輸入一句話描述', 'GPT-4o-mini 解析自然語言 → 結構化 JSON（標題、日期、起訖時間、是否全天）', '依類別自動套用 Google Calendar 顏色（colorId 4 / 7 / 10 / 11）', '/update_event：抓最近 20 筆未來事件 → 下拉選擇 → Modal 預填 → 修改寫回', 'Prompt 規則：去除時間詞做標題、區分全天 vs 時段、單一時間點 start = end，範圍 start ≠ end'] },
+        { heading: '平台串接與部署', type: 'list', items: ['discord.py slash command + UI 元件（Button / Select / Modal）', 'Google Calendar API v3，OAuth2 授權 + token.json 機制', 'Fly.io（東京節點，256MB）部署，--ha=false 避免兩台機器同時收到 Discord 事件造成重複回應', 'GOOGLE_TOKEN_JSON 環境變數注入，繞過 Fly.io 重啟清空檔案系統的限制', 'access_token 過期自動用 refresh_token 重取並寫回'] },
+        { heading: '技術挑戰與容錯', type: 'list', items: ['Google 長閒置連線過期（BrokenPipe / ConnectionReset）→ _execute() 包裝偵測錯誤自動重連重試', 'Discord 互動 3 秒回應限制 → 需要 I/O 的指令先 defer() 佔位，完成後用 followup.send()', 'Discord slash command 註冊有頻率限制 → tree.sync() 用 try/except 包住避免崩潰'] },
+        { heading: '使用工具', type: 'pills', items: ['Python', 'discord.py', 'OpenAI GPT-4o-mini', 'Google Calendar API v3', 'OAuth2', 'Fly.io', 'Docker'] }
       ]
     }
   };
